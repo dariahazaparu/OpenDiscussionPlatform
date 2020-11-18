@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1259
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDiscussionPlatform", "OpenDiscussionPlatform\OpenDiscussionPlatform.csproj", "{6C957E38-AEB2-41C8-A795-E94633BA7DB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C957E38-AEB2-41C8-A795-E94633BA7DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C957E38-AEB2-41C8-A795-E94633BA7DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C957E38-AEB2-41C8-A795-E94633BA7DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C957E38-AEB2-41C8-A795-E94633BA7DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C086F5B-8100-4CBA-B8E7-BEEF6B8A218B}
+	EndGlobalSection
+EndGlobal
