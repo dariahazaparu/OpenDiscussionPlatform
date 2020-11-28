@@ -10,7 +10,7 @@ namespace OpenDiscussionPlatform.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Categories");
         }
 
         public ActionResult About()

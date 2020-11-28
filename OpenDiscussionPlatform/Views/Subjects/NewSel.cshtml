@@ -1,0 +1,50 @@
+﻿@model OpenDiscussion.Models.Subject
+
+@*@{
+        ViewBag.Title = "New subject";
+    }*@
+
+<div class="vertical-center" style="text-align:center;">
+    <div class="container">
+        <hr style="height:300px;" />
+
+        <h1 style="color:#333456;">Add your new subject</h1>
+        <hr style="border:2px #d4a5a5 solid;" />
+        <form method="post" action="/Subjects/NewSel/">
+            <h2 style="color:#14274e;">
+                @Html.Label("Title", "Title")
+            </h2>
+            <div class="div-title">
+                @Html.TextBox("Title", null, new { @class = "form-control form-title" })
+            </div>
+            @Html.ValidationMessage("Title", null, new { @class = "text-danger" })
+            <h2 style="color:#14274e;">
+                @Html.Label("Content", "Content")
+            </h2>
+            <div>
+                @Html.TextArea("Content", null, new { @class = "form-control form-content"})
+            </div>
+            @Html.ValidationMessage("Content", null, new { @class = "text-danger" })
+            <br />
+            <h2 style="color:#14274e;">
+                @Html.Label("CategoryId", "Select topic")
+            </h2>
+            <div>
+                @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
+                                    "Select topic", new { @class = "form-control form-title" })
+            </div>
+            @Html.ValidationMessage("CategoryId", null, new { @class = "text-danger" })
+            <br />
+            <br />
+            <button type="submit" class="button"><span class="glyphicon glyphicon-plus-sign">Add</span></button>
+        </form>
+        <hr />
+        <hr />
+        <hr />
+    </div>
+</div>
+
+
+
+@*<div style="border: 2px #d4a5a5 dashed; width: 30%; display:block; margin-left: auto; margin-right:auto; margin-top: 25px;">
+    "display: initial; background-color: transparent; border-color: transparent; box-shadow: none; text-align: center; font-size: large;"*@

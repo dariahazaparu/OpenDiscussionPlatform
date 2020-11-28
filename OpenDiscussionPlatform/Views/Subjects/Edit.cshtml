@@ -1,0 +1,54 @@
+﻿@model OpenDiscussion.Models.Subject
+
+@*@{
+    ViewBag.Title = "Edit subject";
+}*@
+
+<div class="vertical-center" style="text-align:center;">
+    <div class="container">
+        <hr style="height:200px;" />
+
+        <h1 style="color:#333456;">
+            Edit your subject
+        </h1>
+        <hr style="border:2px #d4a5a5 solid;" />
+        <form method="post" action="/Subjects/Edit/@Model.SubjectId">
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+
+            @Html.HiddenFor(m => m.SubjectId)
+
+            <h1 style="color:#14274e;">
+                @Html.Label("Title", "Title")
+            </h1>
+            <div class="div-title">
+                @Html.Editor("Title", new { htmlAttributes = new { @class = "form-control form-title" } })
+            </div>
+            @Html.ValidationMessage("Title", null, new { @class = "text-danger" })
+            <br />
+
+            <h1 style="color:#14274e;">
+                @Html.Label("Content", "Content")
+            </h1>
+            <div>
+                @Html.Editor("Content", new { htmlAttributes = new { @class = "form-control form-content" } })
+            </div>
+            @Html.ValidationMessage("Content", null, new { @class = "text-danger" })
+
+            @Html.HiddenFor(m => m.Date)
+
+            <h1 style="color:#14274e;">
+                @Html.Label("CategoryId", "Select topic")
+            </h1>
+            <div>
+                @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
+                                        "Select topic", new { @class = "form-control form-title" })
+            </div>
+            @Html.ValidationMessage("CategoryId", null, new { @class = "text-danger" })
+            <br />
+            <br />
+            <button type="submit" class="button"><span>Submit</span></button>
+        </form>
+
+    </div>
+</div>
+

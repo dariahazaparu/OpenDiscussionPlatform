@@ -1,0 +1,28 @@
+﻿@model OpenDiscussion.Models.Category
+
+@{
+    ViewBag.Title = "New topic";
+}
+
+<br /><br />
+<div class="vertical-center" style="text-align:center;">
+    <div class="container">
+        <h1 style="color:#333456;">Add a new topic</h1>
+        <hr style="border:2px #d4a5a5 solid;" />
+        <form method="post" action="/Categories/New">
+
+            <h1 style="color:#14274e;">
+                @Html.Label("CategoryName", "Topic name")
+            </h1>
+            <div class="div-title">
+                @Html.TextBox("CategoryName", null, new { @class = "form-control form-title"})
+            </div>
+            @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
+            <br />
+            <br />
+            <button type="submit" class="button" style="width:250px; background-color:#d4a5a5"><span class="glyphicon glyphicon-plus-sign">Add</span></button>
+        </form>
+    </div>
+</div>
+
+

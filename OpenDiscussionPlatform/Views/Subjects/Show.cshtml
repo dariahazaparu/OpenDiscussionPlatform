@@ -1,0 +1,157 @@
+﻿@model OpenDiscussion.Models.Subject
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<br />
+
+<div class="container">
+    <div class="row">
+       <a href="/Subjects/Index/@Model.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-hand-left"> Back to subjects</span></a>
+    </div>
+</div>
+
+<br />
+
+<div class="container">
+    <div class="row">
+        <h1><strong><span class="glyphicon glyphicon-chevron-right"> @Model.Title</span></strong></h1>
+        <div class="col-sm-10" style="color:#14274e;">
+            <blockquote style="border-left: 2px solid #595b83;">
+                <h4>@Model.Content</h4>
+                <footer>
+                    <sm>@Model.Date</sm>
+                    <br />
+                    <sm>posted by @Model.User.UserName</sm>
+                </footer>
+            </blockquote>
+        </div>
+        @if (Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
+        {
+            <div class="col-sm-2" style="color:#14294e;">
+                <button class="button" style="background-color:#9542e0; width:60px; font-size:20px;">
+                    <a href="/Subjects/Edit/@Model.SubjectId" style="color:#ffc1c1;">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </button>
+                <br />
+                <form method="post" action="/Subjects/Delete/@Model.SubjectId">
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                    <button type="submit" class="button" style="background-color:#af2d2d; width:60px; font-size:20px;">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<hr />
+
+<h2>Comment section</h2>
+
+@if (ViewBag.Message != null)
+{
+    <hr style="border:2px #d4a5a5 solid;" />
+    <div class="text-center">
+        <h3>@ViewBag.Message</h3>
+    </div>
+}
+
+<hr style="border:2px #d4a5a5 solid;" />
+<div class="container">
+    @foreach (var comm in Model.Comments)
+    {
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-1">
+                <h1><span class="glyphicon glyphicon-comment"></span></h1>
+            </div>
+            <div class="col-sm-8">
+                <blockquote>
+                    <h5>@comm.CommContent</h5>
+                    <footer>
+                        <sm class="pull-right"> by @comm.User.UserName</sm>
+                        <br />
+                        <sm class="pull-right"> at @comm.Date</sm>
+                    </footer>
+                </blockquote>
+            </div>
+            @if (comm.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
+            {
+                <div class="col-sm-1">
+                    <div style="display: inline-block; padding-top:40%;">
+                        <button class="button-mic-roz">
+                            <a href="/Comments/Edit/@comm.CommentId">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div style="display: inline-block;  padding-top:40%;">
+                        <form method="post" action="/Comments/Delete/@comm.CommentId">
+                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                            <button type="submit" class="button-mic-rosu">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
+        <hr style="border:2px #d2dcf3 solid;" />
+
+    }
+</div>
+<br />
+
+@if (ViewBag.esteUser)
+{
+    <div class="container">
+        <form method="post" action="/Subjects/Show/">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6">
+                    <h3>@Html.Label("CommContent", "Add your comment")</h3>
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <input type="hidden" name="SubjectId" value="@Model.SubjectId" />
+                    <div>
+                        @Html.TextArea("CommContent", null, new { @class = "form-control form-content" })
+                    </div>
+                    @Html.ValidationMessage("CommContent", "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9"></div>
+                <div class="col-sm-1">
+                    <button type="submit" class="button pull-right" style="margin:0px; font-size:20px; width:120px; ">
+                        <span class="glyphicon glyphicon-check"> Post</span>
+                    </button>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </form>
+    </div>
+}
+<div>
+    <div>
+
+        <br />
+        <br /><br />
+
+
+    </div>
+</div>
+
+
+
+

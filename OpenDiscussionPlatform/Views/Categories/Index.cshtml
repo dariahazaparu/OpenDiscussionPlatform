@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Topics";
+}
+
+<div class="page-header text-center" style="border-bottom:none;">
+    <h1>TOPICS</h1>
+</div>
+
+<hr style="border:2px #d4a5a5 solid;" />
+
+@if (ViewBag.Message != null)
+{
+    <div class="text-center">
+        <h3>@ViewBag.Message</h3>
+    </div>
+}
+<hr style="border:2px #d4a5a5 solid;" />
+
+@foreach (var category in ViewBag.Categories)
+{
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 text-center">
+            <h3><a href="/Subjects/Index/@category.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-th-list"></span> View subjects </a></h3>
+        </div>
+        <div class="col-sm-6 text-center" style="color:#14274e;">
+            <h1><large><strong>@category.CategoryName</strong></large></h1>
+        </div>
+        <div class="col-sm-3 text-center">
+            <!-- aici la un utilizator nu vor aparea butoanele, va si un "new n", cu n nr de subiecte noi aparute de la utlima accesare -->
+            @if (ViewBag.esteAdmin)
+            {
+                <div style="display:inline-block; float:right;">
+                <button class="button" style="background-color:#f4abc4; width:100px;"><a href="/Categories/Edit/@category.CategoryId"><span class="glyphicon glyphicon-pencil"></span></a></button>
+                </div>
+                <div style="display:inline-block; float:right;">
+                    <form method="post" action="/Categories/Delete/@category.CategoryId">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="button" style="width:100px;">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+    <hr style="border:2px #d4a5a5 solid;" />
+}
+<hr />
+<div class="text-center">
+    <div class="container">
+        <div class="row">
+            @if (ViewBag.esteAdmin)
+            {
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <a href="/Categories/New" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign"> Add new topic </span></a>
+                </div>
+                <div class="col-sm-4"></div>
+            }
+
+            @if (ViewBag.afisareButoane)
+            {
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <a href="/Subjects/NewSel" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign"> Add new subject </span></a>
+                </div>
+                <div class="col-sm-4"></div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<!-- a6d0e4 d4a5a5 f9ffea a6d0e4 f4abc4 595b83 333456 060930     1c2b2d-->

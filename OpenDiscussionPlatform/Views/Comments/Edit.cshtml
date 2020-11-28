@@ -1,0 +1,39 @@
+﻿@model OpenDiscussion.Models.Comment
+
+@{
+    ViewBag.Title = "Edit comment";
+}
+
+<div>
+    <div class="vertical-center" style="text-align:center;">
+        <div class="container">
+            <br />
+            <br />
+            <h1 style="color:#333456;">
+                Edit your comment
+            </h1>
+            <hr style="border:2px #d4a5a5 solid;" />
+            <form method="post" action="/Comments/Edit/@Model.CommentId">
+                @Html.HttpMethodOverride(HttpVerbs.Put)
+                @Html.HiddenFor(m => m.CommentId)
+
+                <h1 style="color:#14274e;">
+                    @Html.Label("CommContent", "Comment")
+                </h1>
+                <div>
+                    @Html.Editor("CommContent", new { htmlAttributes = new { @class = "form-control form-content" } })
+                </div>
+                @Html.ValidationMessage("CommContent", null, new { @class = "text-danger" })
+                <br />
+
+                @Html.HiddenFor(m => m.Date)
+
+                <button type="submit" class="button">
+                    <span>Submit</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

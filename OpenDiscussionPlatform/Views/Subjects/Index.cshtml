@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Subjects";
+}
+
+<hr style="border:2px #d4a5a5 solid;" />
+<div class="text-center" style="height:70vh; background-color:#e5c6c6; padding-top:30vh;">
+    <h1><large><strong>@ViewBag.Category.CategoryName</strong></large></h1>
+</div>
+<hr style="border:2px #d4a5a5 solid;" />
+
+@if (ViewBag.Message != null)
+{
+    <div class="text-center">
+        <h3>@ViewBag.Message</h3>
+    </div>
+    <hr style="border:2px #d4a5a5 solid;" />
+}
+<div class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="/Categories/Index" class="btn btn-lg"><span class="glyphicon glyphicon-hand-left"> Back to topics</span></a>
+            </div>
+            <div class="col-sm-5"></div>
+            @if (ViewBag.esteUser)
+            {
+                <div class="col-sm-4">
+                    <a href="/Subjects/New/@ViewBag.Category.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign"> Add new subject</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@foreach (var subject in ViewBag.Subjects)
+{
+    <div class="container">
+        <div class="row">
+            <h2><strong><span class="glyphicon glyphicon-chevron-right"></span> @subject.Title</strong></h2>
+            <div class="col-sm-10" style="color:#14274e;">
+                <blockquote style="border-left: 2px solid #595b83;">
+                    <h5>@subject.Content</h5>
+                    <footer>
+                        <sm>@subject.Date</sm>
+                        <br />
+                        <sm>posted by @subject.User.UserName</sm>
+                    </footer>
+                </blockquote>
+            </div>
+            <div class="col-sm-2" style="color:#14274e;">
+                <button class="button" style="background-color:#9542e0; width:60px; font-size:20px;">
+                    <a href="/Subjects/Show/@subject.SubjectId" style="color:#ffc1c1;">
+                        <span class="glyphicon glyphicon-comment"></span>
+                    </a>
+                </button>
+                <br />
+                @if (subject.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
+                {
+                    <button class="button" style="background-color:#f4abc4; width:60px; font-size:20px;">
+                    <a href="/Subjects/Edit/@subject.SubjectId">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    </button>
+                    <br />
+                    <form method="post" action="/Subjects/Delete/@subject.SubjectId">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="button" style="background-color:#af2d2d; width:60px; font-size:20px;">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                }
+            </div>
+
+            <br />
+            <hr />
+        </div>
+    </div>
+}
+
+
+<br />
+

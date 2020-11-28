@@ -1,6 +1,133 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: rgb(255,229,246);
+    background: linear-gradient(131deg, rgba(255,229,246,1) 0%, rgba(220,248,255,1) 100%);
+}
+
+.form-content {
+    display: initial;
+    height: 200px;
+    max-width: 600px;
+    background-color: transparent;
+    border-color: #d4a5a5;
+    background-color: #fdfbfb;
+    transition: none;
+}
+
+.form-title {
+    display: initial;
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    text-align: center;
+    font-size: large;
+    transition: none;
+}
+
+.div-title {
+    border: 2px #d4a5a5 dashed;
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    transition: none;
+}
+
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #1f6f8b;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 10px;
+    width: 150px;
+    transition: all 0.5s;
+    margin: 5px;
+}
+
+    .button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+    .button:hover span {
+        padding-right: 25px;
+    }
+
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+.button-mic-roz {
+    background: linear-gradient(to bottom, #f5b8e2 5%, #5bebf0 100%);
+    background-color: #f5b8e2;
+    border-radius: 4px;
+    border: none;
+    display: inline;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 19px;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+    .button-mic-roz:hover {
+        background: linear-gradient(to bottom, #5bebf0 5%, #f5b8e2 100%);
+        background-color: #5bebf0;
+    }
+
+    .button-mic-roz:active {
+        position: relative;
+        top: 1px;
+    }
+
+.button-mic-rosu {
+    background: linear-gradient(to bottom, #fa1212 5%, #dfed21 100%);
+    background-color: #fa1212;
+    border: none;
+    border-radius: 4px;
+    display: inline;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 19px;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+    .button-mic-rosu:hover {
+        background: linear-gradient(to bottom, #dfed21 5%, #fa1212 100%);
+        background-color: #dfed21;
+    }
+
+    .button-mic-rosu:active {
+        position: relative;
+        top: 1px;
+    }
+
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
 }
 
 /* Set padding to keep content from hitting the edges */

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using OpenDiscussion.Models;
 
 namespace OpenDiscussionPlatform.Models
 {
@@ -23,7 +24,14 @@ namespace OpenDiscussionPlatform.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new
+            MigrateDatabaseToLatestVersion<ApplicationDbContext,
+            OpenDiscussionPlatform.Migrations.Configuration>("DefaultConnection"));
         }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public static ApplicationDbContext Create()
         {
