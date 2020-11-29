@@ -19,39 +19,14 @@ namespace OpenDiscussion.Controllers
             return View();
         }
 
-        //NEW
-
-        /*[HttpPost]
-        public ActionResult New(Comment comment)
-        {
-            comment.Date = DateTime.Now;
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    db.Comments.Add(comment);
-                    db.SaveChanges();
-                    TempData["message"] = "The comment has been added!";
-                    return Redirect("/Subjects/Show/" + comment.SubjectId);
-                }
-                else
-                {
-                    return Redirect("/Subjects/Show/" + comment.SubjectId);
-                }
-            }
-            catch (Exception e)
-            {
-                return Redirect("/Subjects/Show/" + comment.SubjectId);
-            }
-        }*/
 
         //EDIT
-        [Authorize(Roles = "User, Moderator")]
+        [Authorize(Roles = "User")]
         public ActionResult Edit(int id)
         {
             Comment comment = db.Comments.Find(id);
 
-            if (comment.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator"))
+            if (comment.UserId == User.Identity.GetUserId())
             {
                 return View(comment);
             }
@@ -63,6 +38,7 @@ namespace OpenDiscussion.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "User")]
         public ActionResult Edit(int id, Comment requestComment)
         {
             try
@@ -71,7 +47,7 @@ namespace OpenDiscussion.Controllers
                 {
                     Comment comment = db.Comments.Find(id);
 
-                    if (comment.UserId == User.Identity.GetUserId() || User.IsInRole("Moderator"))
+                    if (comment.UserId == User.Identity.GetUserId())
                     {
                         if (TryUpdateModel(comment))
                         {
@@ -101,6 +77,7 @@ namespace OpenDiscussion.Controllers
 
         //DELETE
         [HttpDelete]
+        [Authorize(Roles = "User,Moderator")]
         public ActionResult Delete(int id)
         {
             Comment comment = db.Comments.Find(id);

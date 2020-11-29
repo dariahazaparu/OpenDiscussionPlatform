@@ -63,43 +63,46 @@
 <div class="container">
     @foreach (var comm in Model.Comments)
     {
-        <div class="row">
-            <div class="col-sm-1"></div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1">
+            <h1><span class="glyphicon glyphicon-comment"></span></h1>
+        </div>
+        <div class="col-sm-8">
+            <blockquote>
+                <h5>@comm.CommContent</h5>
+                <footer>
+                    <sm class="pull-right"> by @comm.User.UserName</sm>
+                    <br />
+                    <sm class="pull-right"> at @comm.Date</sm>
+                </footer>
+            </blockquote>
+        </div>
+        @if (comm.UserId == ViewBag.utilizatorCurent)
+        {
             <div class="col-sm-1">
-                <h1><span class="glyphicon glyphicon-comment"></span></h1>
+                <div style="display: inline-block; padding-top:40%;">
+                    <button class="button-mic-roz">
+                        <a href="/Comments/Edit/@comm.CommentId">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                    </button>
+                </div>
             </div>
-            <div class="col-sm-8">
-                <blockquote>
-                    <h5>@comm.CommContent</h5>
-                    <footer>
-                        <sm class="pull-right"> by @comm.User.UserName</sm>
-                        <br />
-                        <sm class="pull-right"> at @comm.Date</sm>
-                    </footer>
-                </blockquote>
-            </div>
-            @if (comm.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
-            {
-                <div class="col-sm-1">
-                    <div style="display: inline-block; padding-top:40%;">
-                        <button class="button-mic-roz">
-                            <a href="/Comments/Edit/@comm.CommentId">
-                                <span class="glyphicon glyphicon-edit"></span>
-                            </a>
+        }
+        @if (comm.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
+        { 
+            <div class="col-sm-1">
+                <div style="display: inline-block;  padding-top:40%;">
+                    <form method="post" action="/Comments/Delete/@comm.CommentId">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="button-mic-rosu">
+                            <span class="glyphicon glyphicon-trash"></span>
                         </button>
-                    </div>
+                    </form>
                 </div>
-                <div class="col-sm-1">
-                    <div style="display: inline-block;  padding-top:40%;">
-                        <form method="post" action="/Comments/Delete/@comm.CommentId">
-                            @Html.HttpMethodOverride(HttpVerbs.Delete)
-                            <button type="submit" class="button-mic-rosu">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            }
+            </div>
+         }
         </div>
         <br />
         <hr style="border:2px #d2dcf3 solid;" />

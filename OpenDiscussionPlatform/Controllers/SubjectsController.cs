@@ -44,6 +44,7 @@ namespace OpenDiscussion.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult Show(Comment comm)
         {
             comm.Date = DateTime.Now;
@@ -155,6 +156,7 @@ namespace OpenDiscussion.Controllers
         {
             subject.Date = DateTime.Now;
             ViewBag.id = subject.CategoryId;
+            ViewBag.UserId = User.Identity.GetUserId();
 
             try
             {
@@ -180,6 +182,7 @@ namespace OpenDiscussion.Controllers
         [Authorize(Roles = "User,Moderator")]
         public ActionResult Edit(int id)
         {
+            SetAccessRightsSubjects();
             Subject subject = db.Subjects.Find(id);
             subject.Categ = GetAllCategories();
 
@@ -199,6 +202,7 @@ namespace OpenDiscussion.Controllers
         public ActionResult Edit(int id, Subject requestSubject)
         {
             requestSubject.Categ = GetAllCategories();
+            SetAccessRightsSubjects();
             try
             {
                 if (ModelState.IsValid)
