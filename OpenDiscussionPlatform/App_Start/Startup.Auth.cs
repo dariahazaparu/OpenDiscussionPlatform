@@ -55,9 +55,9 @@ namespace OpenDiscussionPlatform
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1723905434449814",
+               appSecret: "98d0801b040efb5ac4c3542421ef2d2d");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

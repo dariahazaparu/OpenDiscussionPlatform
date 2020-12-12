@@ -25,7 +25,7 @@
             @if (ViewBag.esteUser)
             {
                 <div class="col-sm-4">
-                    <a href="/Subjects/New/@ViewBag.Category.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign"> Add new subject</a>
+                    <a href="/Subjects/New/@ViewBag.Category.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign" /> Add new subject</a>
                 </div>
             }
         </div>
@@ -43,7 +43,7 @@
                     <footer>
                         <sm>@subject.Date</sm>
                         <br />
-                        <sm>posted by @subject.User.UserName</sm>
+                        <sm>by @subject.User.UserName</sm>
                     </footer>
                 </blockquote>
             </div>

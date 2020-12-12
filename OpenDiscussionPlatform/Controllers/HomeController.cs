@@ -10,13 +10,6 @@ namespace OpenDiscussionPlatform.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Categories");
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
