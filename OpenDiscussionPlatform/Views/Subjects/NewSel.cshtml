@@ -4,7 +4,7 @@
         ViewBag.Title = "New subject";
     }*@
 
-<div class="vertical-center" style="text-align:center;">
+<div style="text-align:center;">
     <div class="container">
         <hr style="height:300px;" />
 
@@ -21,8 +21,8 @@
             <h2 style="color:#14274e;">
                 @Html.Label("Content", "Content")
             </h2>
-            <div>
-                @Html.TextArea("Content", null, new { @class = "form-control form-content"})
+            <div style="text-align:initial;">
+                @Html.TextArea("Content", null, new { @class = "form-control form-content summernote"})
             </div>
             @Html.ValidationMessage("Content", null, new { @class = "text-danger" })
             <br />

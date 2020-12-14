@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.Security.Application;
 using OpenDiscussion.Models;
 using OpenDiscussionPlatform.Models;
 using System;
@@ -13,6 +14,8 @@ namespace OpenDiscussion.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        private int _perPage = 3;
+
         // GET: Subjects
         public ActionResult Index(int id)
         {
@@ -20,13 +23,32 @@ namespace OpenDiscussion.Controllers
 
             Category category = db.Categories.Find(id);
             var subjects = category.Subjects;
-            ViewBag.Subjects = subjects;
-            ViewBag.Category = category;
+
+            //var subjects = db.Subjects.Include("Category").Include("User").OrderBy(a => a.Date);
+            var totalItems = subjects.Count();
+            var currentPage = Convert.ToInt32(Request.Params.Get("page"));
+            var offset = 0;
+
+            if (!currentPage.Equals(0))
+            {
+                offset = (currentPage - 1) * this._perPage;
+            }
+
+            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
 
             if (TempData.ContainsKey("message"))
             {
-                ViewBag.Message = TempData["message"].ToString();
+                ViewBag.message = TempData["message"].ToString();
             }
+
+            //ViewBag.perPage = this._perPage;
+            ViewBag.total = totalItems;
+            ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
+            ViewBag.Subjects = paginatedSubjects;
+            //ViewBag.currPage = currentPage; //?????
+
+            //ViewBag.Subjects = subjects;
+            ViewBag.Category = category;
 
             return View();
         }
@@ -112,17 +134,19 @@ namespace OpenDiscussion.Controllers
 
         [HttpPost]
         [Authorize(Roles = "User")]
+        [ValidateInput(false)]
         public ActionResult NewSel(Subject subject)
         {
             subject.Date = DateTime.Now;
             subject.Categ = GetAllCategories();
             subject.UserId = User.Identity.GetUserId();
         
-
             try
             {
                 if (ModelState.IsValid)
                 {
+                    subject.Content = Sanitizer.GetSafeHtmlFragment(subject.Content);
+
                     db.Subjects.Add(subject);
                     db.SaveChanges();
                     TempData["message"] = "The subject has been added!";
@@ -152,6 +176,7 @@ namespace OpenDiscussion.Controllers
 
         [HttpPost]
         [Authorize(Roles = "User")]
+        [ValidateInput(false)]
         public ActionResult New(Subject subject)
         {
             subject.Date = DateTime.Now;
@@ -162,6 +187,7 @@ namespace OpenDiscussion.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    subject.Content = Sanitizer.GetSafeHtmlFragment(subject.Content);
                     db.Subjects.Add(subject);
                     db.SaveChanges();
                     TempData["message"] = "The subject has been added!";
@@ -199,6 +225,7 @@ namespace OpenDiscussion.Controllers
 
         [HttpPut]
         [Authorize(Roles = "User,Moderator")]
+        [ValidateInput(false)]
         public ActionResult Edit(int id, Subject requestSubject)
         {
             requestSubject.Categ = GetAllCategories();
@@ -213,7 +240,8 @@ namespace OpenDiscussion.Controllers
                     {
                         if (TryUpdateModel(subject))
                         {
-                            subject.Title = requestSubject.Title;
+                            subject.Title = requestSubject.Title;                     
+                            requestSubject.Content = Sanitizer.GetSafeHtmlFragment(requestSubject.Content);
                             subject.Content = requestSubject.Content;
                             subject.Date = requestSubject.Date;
                             subject.CategoryId = requestSubject.CategoryId;

@@ -19,7 +19,7 @@
         <h1><strong><span class="glyphicon glyphicon-chevron-right"> @Model.Title</span></strong></h1>
         <div class="col-sm-10" style="color:#14274e;">
             <blockquote style="border-left: 2px solid #595b83;">
-                <h4>@Model.Content</h4>
+                <h4>@Html.Raw(Model.Content)</h4>
                 <footer>
                     <sm>@Model.Date</sm>
                     <br />

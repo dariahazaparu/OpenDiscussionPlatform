@@ -25,13 +25,12 @@ namespace OpenDiscussion.Models
 
         [Required(ErrorMessage = "The topic is required!")]
         public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
+        public IEnumerable<SelectListItem> Categ { get; set; }
 
         public string UserId { get; set; }
-
         public virtual ApplicationUser User { get; set; }
 
-        public virtual Category Category { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public IEnumerable<SelectListItem> Categ { get; set; }
     }
 }

@@ -5,9 +5,8 @@
 }
 
 <div>
-    <div class="vertical-center" style="text-align:center;">
+    <div style="text-align:center;">
         <div class="container">
-            <br />
             <br />
             <h1 style="color:#333456;">
                 Edit your comment
@@ -20,7 +19,7 @@
                 <h1 style="color:#14274e;">
                     @Html.Label("CommContent", "Comment")
                 </h1>
-                <div>
+                <div style="text-align:initial; margin-left:30%; margin-right:30%;">
                     @Html.Editor("CommContent", new { htmlAttributes = new { @class = "form-control form-content" } })
                 </div>
                 @Html.ValidationMessage("CommContent", null, new { @class = "text-danger" })

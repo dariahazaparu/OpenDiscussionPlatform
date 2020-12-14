@@ -39,7 +39,7 @@
             <h2><strong><span class="glyphicon glyphicon-chevron-right"></span> @subject.Title</strong></h2>
             <div class="col-sm-10" style="color:#14274e;">
                 <blockquote style="border-left: 2px solid #595b83;">
-                    <h5>@subject.Content</h5>
+                    <h5>@Html.Raw(subject.Content)</h5>
                     <footer>
                         <sm>@subject.Date</sm>
                         <br />
@@ -57,9 +57,9 @@
                 @if (subject.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
                 {
                     <button class="button" style="background-color:#f4abc4; width:60px; font-size:20px;">
-                    <a href="/Subjects/Edit/@subject.SubjectId">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
+                        <a href="/Subjects/Edit/@subject.SubjectId">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
                     </button>
                     <br />
                     <form method="post" action="/Subjects/Delete/@subject.SubjectId">
@@ -76,7 +76,37 @@
         </div>
     </div>
 }
-
-
+<br />
 <br />
 
+<div style="text-align:center;">
+    <nav aria-label="Page navigation">
+        <ul class="costum">
+            <li>
+                <a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            {
+                @*if (ViewBag.currPage == i)
+                {
+                    <li style="color: #23527c; background-color: #eee;"><a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=@i">@(i)</a></li>
+                }
+                else
+                {*@
+                    <li><a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=@i">@(i)</a></li>
+                @*}*@
+            }
+
+            <li>
+                <a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=@(ViewBag.lastPage)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<br />
