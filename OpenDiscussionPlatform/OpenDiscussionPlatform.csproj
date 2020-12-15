@@ -262,6 +262,7 @@
     <Content Include="Views\Subjects\New.cshtml" />
     <Content Include="Views\Subjects\NewSel.cshtml" />
     <Content Include="Views\Subjects\Show.cshtml" />
+    <Content Include="Views\Subjects\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

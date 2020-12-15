@@ -30,8 +30,9 @@
                 <br />
 
                 <h1 style="color:#14274e;">
-                    @Html.Label("Content", "Content")
+                    @Html.Label("Content", "Details")
                 </h1>
+                <h6 class="text-danger">Table not supported.</h6>
                 <div style=" text-align:initial;">
                     @Html.Editor("Content", new { htmlAttributes = new { @class = "form-control form-content summernote" } })
                 </div>
@@ -45,11 +46,11 @@
             }
 
             <h1 style="color:#14274e;">
-                @Html.Label("CategoryId", "Select topic")
+                @Html.Label("CategoryId", "Select country")
             </h1>
             <div>
                 @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
-                                        "Select topic", new { @class = "form-control form-title" })
+                                        "Select country", new { @class = "form-control form-title" })
             </div>
             @Html.ValidationMessage("CategoryId", null, new { @class = "text-danger" })
             <br />

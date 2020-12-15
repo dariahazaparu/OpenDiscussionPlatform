@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Subjects";
+    ViewBag.Title = "Recipes";
 }
 
 <hr style="border:2px #d4a5a5 solid;" />
@@ -19,13 +19,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <a href="/Categories/Index" class="btn btn-lg"><span class="glyphicon glyphicon-hand-left"> Back to topics</span></a>
+                <a href="/Categories/Index" class="btn btn-lg"><span class="glyphicon glyphicon-hand-left"> Back to countries</span></a>
             </div>
             <div class="col-sm-5"></div>
             @if (ViewBag.esteUser)
             {
                 <div class="col-sm-4">
-                    <a href="/Subjects/New/@ViewBag.Category.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign" /> Add new subject</a>
+                    <a href="/Subjects/New/@ViewBag.Category.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign" /> Add new recipe</a>
                 </div>
             }
         </div>
@@ -90,14 +90,14 @@
 
             @for (int i = 1; i <= ViewBag.lastPage; i++)
             {
-                @*if (ViewBag.currPage == i)
-                {
-                    <li style="color: #23527c; background-color: #eee;"><a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=@i">@(i)</a></li>
-                }
-                else
-                {*@
-                    <li><a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=@i">@(i)</a></li>
-                @*}*@
+                if (ViewBag.currPage.Equals(i))
+                    {
+                        <li style="color: #23527c; background-color: #eee;"><a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=@i">@(i)</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="/Subjects/Index/@ViewBag.Category.CategoryId?page=@i">@(i)</a></li>
+                    }
             }
 
             <li>
@@ -110,3 +110,4 @@
 </div>
 
 <br />
+

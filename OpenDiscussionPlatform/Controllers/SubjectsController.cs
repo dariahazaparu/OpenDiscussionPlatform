@@ -45,10 +45,56 @@ namespace OpenDiscussion.Controllers
             ViewBag.total = totalItems;
             ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
             ViewBag.Subjects = paginatedSubjects;
-            //ViewBag.currPage = currentPage; //?????
+            ViewBag.currPage = currentPage; //?????
 
             //ViewBag.Subjects = subjects;
             ViewBag.Category = category;
+
+            return View();
+        }
+
+        public ActionResult All ()
+        {
+            SetAccessRightsSubjects();
+            var subjects = db.Subjects.Include("Category").Include("User").OrderBy(a => a.Date);
+            var search = "";
+
+            if(Request.Params.Get("search") != null)
+            {
+                search = Request.Params.Get("search").Trim();
+                List<int> subjectIds = db.Subjects.Where(
+                    s => s.Title.Contains(search) || s.Content.Contains(search)
+                    ).Select(a => a.SubjectId).ToList();
+
+                List<int> commentIds = db.Comments.Where(
+                    comm => comm.CommContent.Contains(search)
+                    ).Select(comm => comm.CommentId).ToList();
+
+                List<int> Ids = subjectIds.Union(commentIds).ToList();
+
+               subjects = db.Subjects.Include("Category").Include("User").Where(subj => Ids.Contains(subj.SubjectId)).OrderBy(a => a.Date);
+            }
+
+            var totalItems = subjects.Count();
+            var currentPage = Convert.ToInt32(Request.Params.Get("page"));
+            var offset = 0;
+
+            if (!currentPage.Equals(0))
+            {
+                offset = (currentPage - 1) * this._perPage;
+            }
+
+            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
+
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.Message = TempData["message"].ToString();
+            }
+
+            ViewBag.total = totalItems;
+            ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
+            ViewBag.Subjects = paginatedSubjects;
+            ViewBag.SearchString = search;
 
             return View();
         }

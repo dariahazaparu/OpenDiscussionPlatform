@@ -6,9 +6,8 @@
 
 <div style="text-align:center;">
     <div class="container">
-        <hr style="height:300px;" />
 
-        <h1 style="color:#333456;">Add your new subject</h1>
+        <h1 style="color:#333456;">Add your new recipe</h1>
         <hr style="border:2px #d4a5a5 solid;" />
         <form method="post" action="/Subjects/NewSel/">
             <h2 style="color:#14274e;">
@@ -19,19 +18,20 @@
             </div>
             @Html.ValidationMessage("Title", null, new { @class = "text-danger" })
             <h2 style="color:#14274e;">
-                @Html.Label("Content", "Content")
+                @Html.Label("Content", "Details")
             </h2>
+            <h6 class="text-danger">Table not supported.</h6>
             <div style="text-align:initial;">
-                @Html.TextArea("Content", null, new { @class = "form-control form-content summernote"})
+                @Html.TextArea("Content", null, new { @class = "form-control form-content summernote" })
             </div>
             @Html.ValidationMessage("Content", null, new { @class = "text-danger" })
             <br />
             <h2 style="color:#14274e;">
-                @Html.Label("CategoryId", "Select topic")
+                @Html.Label("CategoryId", "Select country")
             </h2>
             <div>
                 @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
-                                    "Select topic", new { @class = "form-control form-title" })
+                                    "Select country", new { @class = "form-control form-title" })
             </div>
             @Html.ValidationMessage("CategoryId", null, new { @class = "text-danger" })
             <br />

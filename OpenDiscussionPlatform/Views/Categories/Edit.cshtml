@@ -1,14 +1,14 @@
 ﻿@model OpenDiscussion.Models.Category
 
 @{
-    ViewBag.Title = "Edit topic";
+    ViewBag.Title = "Edit country";
 }
 
 <div class="vertical-center" style="text-align:center;">
     <div class="container">
         <br />
         <br />
-        <h1 style="color:#333456;">Edit topic</h1>
+        <h1 style="color:#333456;">Edit country</h1>
         <hr style="border:2px #d4a5a5 solid;" />
         <form method="post" action="/Categories/Edit/@Model.CategoryId">
             @Html.HttpMethodOverride(HttpVerbs.Put)
@@ -16,7 +16,7 @@
             @Html.HiddenFor(m => m.CategoryId)
 
             <h1 style="color:#14274e;">
-                @Html.Label("CategoryName", "Topic name")
+                @Html.Label("CategoryName", "Country name")
             </h1>
             <div class="div-title">
                 @Html.Editor("CategoryName", new { htmlAttributes = new { @class = "form-control form-title" } })
