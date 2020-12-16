@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenDiscussionPlatform.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,6 +15,9 @@ namespace OpenDiscussion.Models
         [Required(ErrorMessage = "The name is required!")]
         [StringLength(25, ErrorMessage = "The name must not be longer than 25 characters!")]
         public string CategoryName { get; set; }
+
+        //public int CategoryPicture { get; set; }
+        //public virtual FileUpload File { get; set; }
 
         public virtual ICollection<Subject> Subjects { get; set; }
     }

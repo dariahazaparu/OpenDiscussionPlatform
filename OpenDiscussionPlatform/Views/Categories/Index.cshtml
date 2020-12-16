@@ -3,11 +3,11 @@
     ViewBag.Title = "Countries";
 }
 
-<div class="page-header text-center" style="border-bottom:none;">
-    <h1>COUNTRIES</h1>
+<div class="page-header text-center" style="border-bottom:none; color: #303952;">
+    <h1 style="font-size:45px;">COUNTRIES</h1>
 </div>
 
-<hr style="border:2px #d4a5a5 solid;" />
+<hr style="border:2px #e15f41 solid;" />
 
 @if (ViewBag.Message != null)
 {
@@ -15,40 +15,43 @@
         <h3>@ViewBag.Message</h3>
     </div>
 }
-<hr style="border:2px #d4a5a5 solid;" />
+<hr style="border:2px #e15f41 solid;" />
 
 @foreach (var category in ViewBag.Categories)
 {
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3 text-center">
-            <h3><a href="/Subjects/Index/@category.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-th-list"></span> View recipes </a></h3>
-        </div>
-        <div class="col-sm-6 text-center" style="color:#14274e;">
-            <h1><large><strong>@category.CategoryName</strong></large></h1>
-        </div>
-        <div class="col-sm-3 text-center">
-            <!-- aici la un utilizator nu vor aparea butoanele, va si un "new n", cu n nr de subiecte noi aparute de la utlima accesare -->
-            @if (ViewBag.esteAdmin)
-            {
-                <div style="display:inline-block; float:right;">
-                <button class="button" style="background-color:#f4abc4; width:100px;"><a href="/Categories/Edit/@category.CategoryId"><span class="glyphicon glyphicon-pencil"></span></a></button>
-                </div>
-                <div style="display:inline-block; float:right;">
-                    <form method="post" action="/Categories/Delete/@category.CategoryId">
-                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button type="submit" class="button" style="width:100px;">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </form>
-                </div>
-            }
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 text-center">
+                <h3><a href="/Subjects/Index/@category.CategoryId" style="color:#303952;"><span class="glyphicon glyphicon-th-list"></span> View recipes </a></h3>
+            </div>
+            <div class="col-sm-6 text-center" style="color:#303952;">
+                <h1><large><strong>@category.CategoryName</strong></large></h1>
+            </div>
+            <div class="col-sm-3 text-center">
+                @if (ViewBag.esteAdmin)
+                {
+                    <div style="display:inline-block; float:right;">
+                        <button class="button" style="background-color:#cf6a87;; width:100px;"><a href="/Categories/Edit/@category.CategoryId"><span class="glyphicon glyphicon-pencil" style="color:white;"></span></a></button>
+                    </div>
+                    <div style="display:inline-block; float:right;">
+                        <form method="post" action="/Categories/Delete/@category.CategoryId">
+                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                            <button type="submit" class="button" style="background-color:#e15f41; width:100px;">
+                                <span class="glyphicon glyphicon-trash" style="color:white;"></span>
+                            </button>
+                        </form>
+                    </div>
+                }
+                
+                @*<span class="badge" style="background-color:#303952; color:white;"></span>*@
+            </div>
         </div>
     </div>
-</div>
-    <hr style="border:2px #d4a5a5 solid;" />
+    <hr style="border:2px #e15f41 solid;" />
 }
-<hr />
+
+<br />
 <div class="text-center">
     <div class="container">
         <div class="row">
@@ -56,7 +59,7 @@
             {
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-                    <a href="/Categories/New" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign"> Add new country </span></a>
+                    <a href="/Categories/New" class="btn btn-lg" style="color:#303952;"><span class="glyphicon glyphicon-plus-sign"> Add new country </span></a>
                 </div>
                 <div class="col-sm-4"></div>
             }
@@ -65,7 +68,7 @@
             {
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-                    <a href="/Subjects/NewSel" class="btn btn-lg"><span class="glyphicon glyphicon-plus-sign"> Add new recipe </span></a>
+                    <a href="/Subjects/NewSel" class="btn btn-lg" style="color:#303952;"><span class="glyphicon glyphicon-plus-sign"> Add new recipe </span></a>
                 </div>
                 <div class="col-sm-4"></div>
             }
@@ -73,5 +76,3 @@
         </div>
     </div>
 </div>
-
-<!-- a6d0e4 d4a5a5 f9ffea a6d0e4 f4abc4 595b83 333456 060930     1c2b2d-->

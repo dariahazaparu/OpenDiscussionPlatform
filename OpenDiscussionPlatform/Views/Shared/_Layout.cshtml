@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top" style="background-color: #303952;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,14 +18,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Gourmet World Tour", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Gourmet World Tour", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color: #f7d794;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("My Profile", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Countries", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("All recipes", "All", "Subjects")</li>
-                    <li>@Html.ActionLink("Contact us", "Contact", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("My Profile", "Index", "Home", new { area = "" }, new { @style = "color: #f7d794;" })</li>
+                    }
+                    <li>@Html.ActionLink("Countries", "Index", "Categories", new { area = "" }, new { @style = "color: #f7d794;" })</li>
+                    <li>@Html.ActionLink("All recipes", "All", "Subjects", new { area = "" }, new { @style = "color: #f7d794;" })</li>
+                    <li>@Html.ActionLink("Contact us", "Contact", "Home", new { area = "" }, new { @style = "color: #f7d794;" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

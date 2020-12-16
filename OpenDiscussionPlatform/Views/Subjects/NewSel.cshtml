@@ -7,17 +7,19 @@
 <div style="text-align:center;">
     <div class="container">
 
-        <h1 style="color:#333456;">Add your new recipe</h1>
-        <hr style="border:2px #d4a5a5 solid;" />
+        <h1 style="color:#303952;">
+            Add your new recipe
+        </h1>
+        <hr style="border:2px #e15f41 solid;" />
         <form method="post" action="/Subjects/NewSel/">
-            <h2 style="color:#14274e;">
+            <h2 style="color:#303952;">
                 @Html.Label("Title", "Title")
             </h2>
             <div class="div-title">
                 @Html.TextBox("Title", null, new { @class = "form-control form-title" })
             </div>
             @Html.ValidationMessage("Title", null, new { @class = "text-danger" })
-            <h2 style="color:#14274e;">
+            <h2 style="color:#303952;">
                 @Html.Label("Content", "Details")
             </h2>
             <h6 class="text-danger">Table not supported.</h6>
@@ -26,25 +28,17 @@
             </div>
             @Html.ValidationMessage("Content", null, new { @class = "text-danger" })
             <br />
-            <h2 style="color:#14274e;">
+            <h2 style="color:#303952;">
                 @Html.Label("CategoryId", "Select country")
             </h2>
             <div>
                 @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
-                                    "Select country", new { @class = "form-control form-title" })
+                                    "Country", new { @class = "form-control form-title" })
             </div>
             @Html.ValidationMessage("CategoryId", null, new { @class = "text-danger" })
             <br />
             <br />
-            <button type="submit" class="button"><span class="glyphicon glyphicon-plus-sign">Add</span></button>
+            <button type="submit" class="button" style="background-color:#e15f41;"><span class="glyphicon glyphicon-plus-sign" style="color:white;">Add</span></button>
         </form>
-        <hr />
-        <hr />
-        <hr />
     </div>
 </div>
-
-
-
-@*<div style="border: 2px #d4a5a5 dashed; width: 30%; display:block; margin-left: auto; margin-right:auto; margin-top: 25px;">
-    "display: initial; background-color: transparent; border-color: transparent; box-shadow: none; text-align: center; font-size: large;"*@

@@ -32,6 +32,7 @@ namespace OpenDiscussionPlatform.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<FileUpload> FileUploads { get; set; }
 
         public static ApplicationDbContext Create()
         {

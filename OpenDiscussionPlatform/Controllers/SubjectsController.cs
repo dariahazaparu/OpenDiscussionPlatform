@@ -4,6 +4,7 @@ using OpenDiscussion.Models;
 using OpenDiscussionPlatform.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -49,6 +50,13 @@ namespace OpenDiscussion.Controllers
 
             //ViewBag.Subjects = subjects;
             ViewBag.Category = category;
+            //if (category.CategoryPicture != 0)
+            //{
+            //    var img = db.FileUploads.Find(category.CategoryPicture);
+            //    ViewBag.imgsrc = img.FileName;
+            //    Debug.WriteLine("ajtr imgsrc");
+
+            //}
 
             return View();
         }
@@ -68,7 +76,7 @@ namespace OpenDiscussion.Controllers
 
                 List<int> commentIds = db.Comments.Where(
                     comm => comm.CommContent.Contains(search)
-                    ).Select(comm => comm.CommentId).ToList();
+                    ).Select(comm => comm.SubjectId).ToList();
 
                 List<int> Ids = subjectIds.Union(commentIds).ToList();
 

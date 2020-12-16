@@ -13,7 +13,9 @@
                        placeholder="Search keywords" style="height:40px;">
             </div>
             <div class="col-sm-3">
-                <button type="submit" class="button" style="background-color:#f4abc4; margin: 0; width:150px; height: 40px; font-size:18px;">Search</button>
+                <button type="submit" class="button" style="background-color:#574b90; margin: 0; width:100px; height: 40px; font-size:18px;">
+                    <span class="glyphicon glyphicon-search" style="color:white;"></span>
+                </button>
             </div>
             <div class="col-sm-3"></div>
         </form>
@@ -25,16 +27,16 @@
 {
     <div class="container">
         <div class="row">
-            <h2>
-                <strong style="color:#595b83;">
+            <h2 style="color:#e15f41;">
+                <strong>
                     <span class="glyphicon glyphicon-chevron-right"></span> @subject.Category.CategoryName
                 </strong>
-                <strong>
+                <strong style="color:#303952;">
                     <span class="glyphicon glyphicon-chevron-right"></span> @subject.Title
                 </strong>
             </h2>
-            <div class="col-sm-10" style="color:#14274e;">
-                <blockquote style="border-left: 2px solid #595b83;">
+            <div class="col-sm-10" style="color:#303952;">
+                <blockquote style="border-left: 2px solid #303952;">
                     <h5>@Html.Raw(subject.Content)</h5>
                     <footer>
                         <sm>@subject.Date</sm>
@@ -44,23 +46,23 @@
                 </blockquote>
             </div>
             <div class="col-sm-2" style="color:#14274e;">
-                <button class="button" style="background-color:#9542e0; width:60px; font-size:20px;">
-                    <a href="/Subjects/Show/@subject.SubjectId" style="color:#ffc1c1;">
+                <button class="button" style="background-color:#786fa6; width:60px; font-size:20px;">
+                    <a href="/Subjects/Show/@subject.SubjectId" style="color:white">
                         <span class="glyphicon glyphicon-comment"></span>
                     </a>
                 </button>
                 <br />
                 @if (subject.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
                 {
-                    <button class="button" style="background-color:#f4abc4; width:60px; font-size:20px;">
-                        <a href="/Subjects/Edit/@subject.SubjectId">
+                    <button class="button" style="background-color:#cf6a87; width:60px; font-size:20px;">
+                        <a href="/Subjects/Edit/@subject.SubjectId" style="color:white;">
                             <span class="glyphicon glyphicon-edit"></span>
                         </a>
                     </button>
                     <br />
                     <form method="post" action="/Subjects/Delete/@subject.SubjectId">
                         @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button type="submit" class="button" style="background-color:#af2d2d; width:60px; font-size:20px;">
+                        <button type="submit" class="button" style="background-color:#e15f41; color:white; width:60px; font-size:20px;">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </form>
@@ -74,9 +76,9 @@
 }
 
 
-<div>
+<div style="text-align:center;">
     <nav aria-label="Page navigation">
-        <ul class="pagination">
+        <ul class="costum">
             <li>
                 @if (ViewBag.search != "")
                 {<a href="/Subjects/All?page=1&search=@ViewBag.SearchString" aria-label="Previous">

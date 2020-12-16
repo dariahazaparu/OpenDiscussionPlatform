@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-       <a href="/Subjects/Index/@Model.CategoryId" class="btn btn-lg"><span class="glyphicon glyphicon-hand-left"> Back to recipes</span></a>
+       <a href="/Subjects/Index/@Model.CategoryId" class="btn btn-lg" style="color: #303952;"><span class="glyphicon glyphicon-hand-left"> Back to recipes</span></a>
     </div>
 </div>
 
@@ -16,9 +16,9 @@
 
 <div class="container">
     <div class="row">
-        <h1><strong><span class="glyphicon glyphicon-chevron-right"> @Model.Title</span></strong></h1>
-        <div class="col-sm-10" style="color:#14274e;">
-            <blockquote style="border-left: 2px solid #595b83;">
+        <h1><strong><span class="glyphicon glyphicon-chevron-right" style="color: #303952;"> @Model.Title</span></strong></h1>
+        <div class="col-sm-10" style="color:#303952;">
+            <blockquote style="border-left: 2px solid #303952;">
                 <h4>@Html.Raw(Model.Content)</h4>
                 <footer>
                     <sm>@Model.Date</sm>
@@ -30,15 +30,15 @@
         @if (Model.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
         {
             <div class="col-sm-2" style="color:#14294e;">
-                <button class="button" style="background-color:#9542e0; width:60px; font-size:20px;">
-                    <a href="/Subjects/Edit/@Model.SubjectId" style="color:#ffc1c1;">
+                <button class="button" style="background-color:#cf6a87; width:60px; font-size:20px;">
+                    <a href="/Subjects/Edit/@Model.SubjectId" style="color:white;">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
                 </button>
                 <br />
                 <form method="post" action="/Subjects/Delete/@Model.SubjectId">
                     @Html.HttpMethodOverride(HttpVerbs.Delete)
-                    <button type="submit" class="button" style="background-color:#af2d2d; width:60px; font-size:20px;">
+                    <button type="submit" class="button" style="background-color:#e15f41; color:white; width:60px; font-size:20px;">
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </form>
@@ -47,30 +47,30 @@
     </div>
 </div>
 <br />
-<hr />
+<br />
 
-<h2>Comments section</h2>
+<h2 style="color: #303952;">Comments section</h2>
 
 @if (ViewBag.Message != null)
 {
-    <hr style="border:2px #d4a5a5 solid;" />
+    <hr style="border:2px #e15f41 solid;" />
     <div class="text-center">
         <h3>@ViewBag.Message</h3>
     </div>
 }
 
-<hr style="border:2px #d4a5a5 solid;" />
+<hr style="border:2px #e15f41 solid;" />
 <div class="container">
     @foreach (var comm in Model.Comments)
     {
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-1">
-            <h1><span class="glyphicon glyphicon-comment"></span></h1>
+            <h1><span class="glyphicon glyphicon-comment" style="color: #303952;"></span></h1>
         </div>
         <div class="col-sm-8">
-            <blockquote>
-                <h5>@comm.CommContent</h5>
+            <blockquote style="border-left: 2px solid #303952;">
+                <h5 style="color: #303952;">@comm.CommContent</h5>
                 <footer>
                     <sm class="pull-right"> by @comm.User.UserName</sm>
                     <br />
@@ -81,10 +81,10 @@
         @if (comm.UserId == ViewBag.utilizatorCurent)
         {
             <div class="col-sm-1">
-                <div style="display: inline-block; padding-top:40%;">
-                    <button class="button-mic-roz">
+                <div style="display: inline-block; padding-top:40%; float:right;">
+                    <button class="button-mic" style="background-color:#cf6a87;">
                         <a href="/Comments/Edit/@comm.CommentId">
-                            <span class="glyphicon glyphicon-edit"></span>
+                            <span class="glyphicon glyphicon-edit" style="color:white;"></span>
                         </a>
                     </button>
                 </div>
@@ -93,11 +93,11 @@
         @if (comm.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
         { 
             <div class="col-sm-1">
-                <div style="display: inline-block;  padding-top:40%;">
+                <div style="display: inline-block;  padding-top:40%;  float:left;">
                     <form method="post" action="/Comments/Delete/@comm.CommentId">
                         @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button type="submit" class="button-mic-rosu">
-                            <span class="glyphicon glyphicon-trash"></span>
+                        <button type="submit" class="button-mic" style="background-color:#e15f41;">
+                            <span class="glyphicon glyphicon-trash" style="color:white;"></span>
                         </button>
                     </form>
                 </div>
@@ -105,7 +105,7 @@
          }
         </div>
         <br />
-        <hr style="border:2px #d2dcf3 solid;" />
+        <hr style="border:1.5px #f19066 solid;" />
 
     }
 </div>
@@ -118,7 +118,7 @@
             <div class="row">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-6">
-                    <h3>@Html.Label("CommContent", "Add your comment")</h3>
+                    <h3>@Html.Label("CommContent", "Add your comment", new { @style = "color: #303952;" })</h3>
                 </div>
                 <div class="col-sm-4"></div>
             </div>
@@ -136,8 +136,8 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-1">
-                    <button type="submit" class="button pull-right" style="margin:0px; font-size:20px; width:120px; ">
-                        <span class="glyphicon glyphicon-check"> Post</span>
+                    <button type="submit" class="button pull-right" style="background-color: #574b90; margin:0px; color:white; font-size:20px; width:120px; ">
+                        <span class="glyphicon glyphicon-check" > Post</span>
                     </button>
                 </div>
                 <div class="col-sm-2"></div>

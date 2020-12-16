@@ -1,8 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: rgb(255,229,246);
-    background: linear-gradient(131deg, rgba(255,229,246,1) 0%, rgba(220,248,255,1) 100%);
+    background: rgb(247,215,148);
+    background: linear-gradient(135deg, rgba(247,215,148,1) 0%, rgba(255,177,204,1) 100%);
 }
 
 .form-content {
@@ -27,7 +27,7 @@
 }
 
 .div-title {
-    border: 2px #d4a5a5 dashed;
+    border: 2px #f19066 dashed;
     width: 30%;
     display: block;
     margin-left: auto;
@@ -75,51 +75,17 @@
             right: 0;
         }
 
-.button-mic-roz {
-    background: linear-gradient(to bottom, #f5b8e2 5%, #5bebf0 100%);
-    background-color: #f5b8e2;
+
+.button-mic {
+    display: inline-block;
     border-radius: 4px;
     border: none;
-    display: inline;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 19px;
-    padding: 8px 15px;
-    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    margin: 5px;
+    width: 40px;
 }
-
-    .button-mic-roz:hover {
-        background: linear-gradient(to bottom, #5bebf0 5%, #f5b8e2 100%);
-        background-color: #5bebf0;
-    }
-
-    .button-mic-roz:active {
-        position: relative;
-        top: 1px;
-    }
-
-.button-mic-rosu {
-    background: linear-gradient(to bottom, #fa1212 5%, #dfed21 100%);
-    background-color: #fa1212;
-    border: none;
-    border-radius: 4px;
-    display: inline;
-    color: #ffffff;
-    font-family: Arial;
-    font-size: 19px;
-    padding: 8px 15px;
-    text-decoration: none;
-}
-
-    .button-mic-rosu:hover {
-        background: linear-gradient(to bottom, #dfed21 5%, #fa1212 100%);
-        background-color: #dfed21;
-    }
-
-    .button-mic-rosu:active {
-        position: relative;
-        top: 1px;
-    }
 
 
 .vertical-center {
@@ -159,7 +125,7 @@ textarea {
     padding-left: 0;
     border-radius: 4px;
     font-size: larger;
-    text-emphasis-color: black;
+    text-emphasis-color: #303952;
     height: 70px;
 }
 
@@ -168,17 +134,17 @@ textarea {
     margin: 2.5px;
 }
 
-.costum > li > a,
-.costum > li > span {
-    position: relative;
-    /*float: left;*/
-    padding: 6px 12px;
-    line-height: 1.42857143;
-    /*color: #337ab7;*/
-    text-decoration: none;
-    background-color: #a6d0e4;
-    /*border: 1px solid #ddd;*/
-}
+    .costum > li > a,
+    .costum > li > span {
+        position: relative;
+        /*float: left;*/
+        padding: 6px 12px;
+        line-height: 1.42857143;
+        color: #f7d794;
+        text-decoration: none;
+        background-color: #c44569;
+        /*border: 1px solid #ddd;*/
+    }
 
 .costum > li:first-child > a,
 .costum > li:first-child > span {
@@ -192,11 +158,13 @@ textarea {
     border-bottom-right-radius: 50px;
 }
 
-.costum > li > a:hover,
-.costum > li > span:hover,
-.costum > li > a:focus,
-.costum > li > span:focus {
-    z-index: 2;
-    color: #23527c;
-    background-color: #eee;
-}
+    .costum > li > a:hover,
+    .costum > li > span:hover,
+    .costum > li > a:focus,
+    .costum > li > span:focus {
+        z-index: 2;
+        color: #303952;
+        background-color: #f8a5c2;
+        border: 1.5px #c44569 solid;
+
+    }

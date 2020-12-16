@@ -7,10 +7,10 @@
 <div style="text-align:center;">
     <div class="container">
 
-        <h1 style="color:#333456;">
-            Edit your subject
+        <h1 style="color:#303952;">
+            Edit your recipe
         </h1>
-        <hr style="border:2px #d4a5a5 solid;" />
+        <hr style="border:2px #e15f41 solid;" />
         <form method="post" action="/Subjects/Edit/@Model.SubjectId">
 
             @Html.HttpMethodOverride(HttpVerbs.Put)
@@ -20,7 +20,7 @@
             @if (ViewBag.esteUser)
             {
 
-                <h1 style="color:#14274e;">
+                <h1 style="color:#303952;">
                     @Html.Label("Title", "Title")
                 </h1>
                 <div class="div-title">
@@ -29,7 +29,7 @@
                 @Html.ValidationMessage("Title", null, new { @class = "text-danger" })
                 <br />
 
-                <h1 style="color:#14274e;">
+                <h1 style="color:#303952;">
                     @Html.Label("Content", "Details")
                 </h1>
                 <h6 class="text-danger">Table not supported.</h6>
@@ -45,19 +45,18 @@
                 @Html.HiddenFor(m => m.Content)
             }
 
-            <h1 style="color:#14274e;">
+            <h1 style="color:#303952;">
                 @Html.Label("CategoryId", "Select country")
             </h1>
             <div>
                 @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categ, "Value", "Text"),
-                                        "Select country", new { @class = "form-control form-title" })
+                                        "Country", new { @class = "form-control form-title" })
             </div>
             @Html.ValidationMessage("CategoryId", null, new { @class = "text-danger" })
             <br />
             <br />
-            <button type="submit" class="button"><span>Submit</span></button>
+            <button type="submit" class="button" style="background-color:#e15f41;"><span style="color:white;">Submit</span></button>
         </form>
-
     </div>
 </div>
 

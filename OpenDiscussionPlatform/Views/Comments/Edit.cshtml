@@ -8,15 +8,15 @@
     <div style="text-align:center;">
         <div class="container">
             <br />
-            <h1 style="color:#333456;">
+            <h1 style="color:#303952;">
                 Edit your comment
             </h1>
-            <hr style="border:2px #d4a5a5 solid;" />
+            <hr style="border:2px #e15f41 solid;" />
             <form method="post" action="/Comments/Edit/@Model.CommentId">
                 @Html.HttpMethodOverride(HttpVerbs.Put)
                 @Html.HiddenFor(m => m.CommentId)
 
-                <h1 style="color:#14274e;">
+                <h1 style="color:#303952;">
                     @Html.Label("CommContent", "Comment")
                 </h1>
                 <div style="text-align:initial; margin-left:30%; margin-right:30%;">
@@ -24,11 +24,11 @@
                 </div>
                 @Html.ValidationMessage("CommContent", null, new { @class = "text-danger" })
                 <br />
-
+                <br />
                 @Html.HiddenFor(m => m.Date)
 
-                <button type="submit" class="button">
-                    <span>Submit</span>
+                <button type="submit" class="button" style="background-color:#e15f41;">
+                    <span style="color:white;">Submit</span>
                 </button>
             </form>
         </div>

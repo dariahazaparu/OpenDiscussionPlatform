@@ -9,19 +9,27 @@
     <div class="container">
         <h1 style="color:#333456;">Add a new country</h1>
         <hr style="border:2px #d4a5a5 solid;" />
-        <form method="post" action="/Categories/New">
+        @using (Html.BeginForm("New", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <h1 style="color:#14274e;">
+                    @Html.Label("CategoryName", "Country name")
+                </h1>
 
-            <h1 style="color:#14274e;">
-                @Html.Label("CategoryName", "Country name")
-            </h1>
-            <div class="div-title">
-                @Html.TextBox("CategoryName", null, new { @class = "form-control form-title"})
+                <div class="div-title">
+                    @Html.TextBox("CategoryName", null, new { @class = "form-control form-title" })
+                </div>
+
+                @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
             </div>
-            @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
             <br />
+            @*<div class="form-group">
+                <label>Alegeti un fisier</label>
+                <input type="file" name="uploadedFile" />
+            </div>*@
             <br />
             <button type="submit" class="button" style="width:250px; background-color:#d4a5a5"><span class="glyphicon glyphicon-plus-sign">Add</span></button>
-        </form>
+        }
     </div>
 </div>
 
