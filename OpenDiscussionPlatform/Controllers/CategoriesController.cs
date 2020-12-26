@@ -28,12 +28,13 @@ namespace OpenDiscussion.Controllers
                 ViewBag.Message = TempData["message"].ToString();
             }
 
-            ////IDictionary<Category, int> nrSubjects = new Dictionary<Category, int>();
-            //foreach (var i in categories)
-            //{
-            //    //List<int> subjectIds = db.Subjects.Where(s => s.CategoryId == i.CategoryId).Select(a => a.SubjectId).ToList(); 
-            ////    nrSubjects.Add(i, subjectIds.Count());
-            //}
+            IDictionary<Category, int> nrSubjects = new Dictionary<Category, int>();
+            foreach (var i in categories)
+            {
+                List<int> subjectIds = db.Subjects.Where(s => s.CategoryId == i.CategoryId).Select(a => a.SubjectId).ToList(); 
+                    nrSubjects.Add(i, subjectIds.Count());
+            }
+            ViewBag.nrSubjects = nrSubjects;
 
             return View();
         }

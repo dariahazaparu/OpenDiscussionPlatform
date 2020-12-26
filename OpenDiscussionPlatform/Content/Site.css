@@ -168,3 +168,17 @@ textarea {
         border: 1.5px #c44569 solid;
 
     }
+
+.badge-c {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin-top: 10%;
+}
