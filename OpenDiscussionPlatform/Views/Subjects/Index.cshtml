@@ -8,7 +8,7 @@
 </div>
 @*@if (ViewBag.imgsrc != "")
 {
-    <img alt="img" src="@ViewBag.imgsrc" style="height:100px; width:100px;" />
+    <img alt="img" src=@ViewBag.imgsrc style="height:100px; width:100px;" />
 }*@
 <hr style="border:2px #e15f41 solid;" />
 
@@ -51,7 +51,7 @@
                     <footer>
                         <sm>@subject.Date</sm>
                         <br />
-                        <sm>by @subject.User.UserName</sm>
+                        <sm>by <a href="/Users/Info/@subject.UserId" style="color:#e15f41;">@subject.User.UserName</a></sm>
                     </footer>
                 </blockquote>
             </div>

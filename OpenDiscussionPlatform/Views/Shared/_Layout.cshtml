@@ -22,9 +22,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("All users", "All", "Users", new { area = "" }, new { @style = "color: #f7d794;" }) </li>
+                    }
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("My Profile", "Index", "Home", new { area = "" }, new { @style = "color: #f7d794;" })</li>
+                        <li>@Html.ActionLink("My Profile", "Info", "Users", new { id = "Profile" }, new { @style = "color: #f7d794;" })</li>
                     }
                     <li>@Html.ActionLink("Countries", "Index", "Categories", new { area = "" }, new { @style = "color: #f7d794;" })</li>
                     <li>@Html.ActionLink("All recipes", "All", "Subjects", new { area = "" }, new { @style = "color: #f7d794;" })</li>

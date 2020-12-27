@@ -23,7 +23,7 @@
                 <footer>
                     <sm>@Model.Date</sm>
                     <br />
-                    <sm>by @Model.User.UserName</sm>
+                    <sm>by <a href="/Users/Info/@Model.UserId" style="color:#e15f41;">@Model.User.UserName</a></sm>
                 </footer>
             </blockquote>
         </div>
@@ -72,7 +72,7 @@
             <blockquote style="border-left: 2px solid #303952;">
                 <h5 style="color: #303952;">@comm.CommContent</h5>
                 <footer>
-                    <sm class="pull-right"> by @comm.User.UserName</sm>
+                    <sm class="pull-right"> by <a href="/Users/Info/@comm.UserId" style="color:#e15f41;">@comm.User.UserName</a></sm>
                     <br />
                     <sm class="pull-right"> at @comm.Date</sm>
                 </footer>

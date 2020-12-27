@@ -12,7 +12,6 @@
     max-width: 100%;
     background-color: transparent;
     border-color: #d4a5a5;
-    background-color: #fdfbfb;
     transition: none;
 }
 
@@ -87,16 +86,6 @@
     width: 40px;
 }
 
-
-.vertical-center {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    text-align: center;
-}
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -118,7 +107,7 @@ textarea {
 }
 
 .costum {
-    align: center;
+    /*align: center;*/
     display: flex;
     justify-content: center;
     align-items: baseline;
@@ -131,7 +120,7 @@ textarea {
 
 .costum > li {
     display: inline;
-    margin: 2.5px;
+    /*margin: 2.5px;*/
 }
 
     .costum > li > a,

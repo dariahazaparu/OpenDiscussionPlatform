@@ -1,0 +1,116 @@
+﻿@model OpenDiscussionPlatform.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Info";
+}
+
+<h2>Info</h2>
+
+@if (ViewBag.Message != null)
+{
+    <hr style="border:2px #e15f41 solid;" />
+    <div class="text-center">
+        <h3>@ViewBag.Message</h3>
+    </div>
+}
+
+<h3>@Model.UserName</h3>
+<div>
+    @Html.LabelFor(m => m.Description)
+    @Model.Description
+    <br />
+    @Html.LabelFor(m => m.FullName)
+    @Model.FullName
+    <br />
+    @Html.LabelFor(m => m.FavFood)
+    @Model.FavFood
+    <br />
+    @Html.LabelFor(m => m.School)
+    @Model.School
+    <br />
+    @Html.LabelFor(m => m.City)
+    @Model.City
+    <br />
+    *o sa existe si poza
+    <br />
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+    <form method="post" action="/Users/Info/@Model.Id">
+        @Html.HttpMethodOverride(HttpVerbs.Put)
+
+        <br />
+        @Html.DropDownList("newRole", new SelectList(Model.AllRoles, "Value", "Text", ViewBag.userRole), null, new { @class = "form-control" })
+        <button class="btn btn-sm btn-success" type="submit">Set new role</button>
+    </form>
+
+    <form method="post" action="/Users/Delete/@Model.Id">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+
+        <button type="submit" class="button" style="background-color:#e15f41;">
+            <span style="color:white;">Delete</span>
+        </button>
+
+    </form>
+}
+
+@if (Model.Id == ViewBag.utilizatorCurent)
+{
+    <a href="/Users/Edit/Profile">Edit profile</a>
+
+    if (User.IsInRole("User"))
+    {
+        <a href="/Subjects/NewSel" class="btn btn-lg" style="color:#303952;"><span class="glyphicon glyphicon-plus-sign"> Add new recipe </span></a>
+    }
+}
+
+@foreach (var subject in ViewBag.Subjects)
+{
+    <div class="container">
+        <div class="row">
+            <h2 style="color:#e15f41;">
+                <strong>
+                    <span class="glyphicon glyphicon-chevron-right"></span> @subject.Category.CategoryName
+                </strong>
+                <strong style="color:#303952;">
+                    <span class="glyphicon glyphicon-chevron-right"></span> @subject.Title
+                </strong>
+            </h2>
+            <div class="col-sm-10" style="color:#303952;">
+                <blockquote style="border-left: 2px solid #303952;">
+                    <h5>@Html.Raw(subject.Content)</h5>
+                    <footer>
+                        <sm>@subject.Date</sm>
+                    </footer>
+                </blockquote>
+            </div>
+            <div class="col-sm-2" style="color:#14274e;">
+                <button class="button" style="background-color:#786fa6; width:60px; font-size:20px;">
+                    <a href="/Subjects/Show/@subject.SubjectId" style="color:white">
+                        <span class="glyphicon glyphicon-comment"></span>
+                    </a>
+                </button>
+                <br />
+                @if (subject.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
+                {
+                    <button class="button" style="background-color:#cf6a87; width:60px; font-size:20px;">
+                        <a href="/Subjects/Edit/@subject.SubjectId" style="color:white;">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                    </button>
+                    <br />
+                    <form method="post" action="/Subjects/Delete/@subject.SubjectId">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="button" style="background-color:#e15f41; color:white; width:60px; font-size:20px;">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                }
+            </div>
+
+            <br />
+            <hr />
+        </div>
+    </div>
+}

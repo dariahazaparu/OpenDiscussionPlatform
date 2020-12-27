@@ -11,6 +11,28 @@
             Edit country
         </h1>
         <hr style="border:2px #e15f41 solid;" />
+        @using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <h1>
+                    @Html.Label("CategoryName", "Country name")
+                </h1>
+
+                <div class="div-title">
+                    @Html.TextBox("CategoryName", null, new { @class = "form-control form-title" })
+                </div>
+
+                @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
+            </div>
+            @*<br />
+            <div class="form-group">
+                <label>Change the picture</label>
+                <input type="file" name="updoadedFile" />
+            </div>*@
+            <br />
+            <button type="submit" class="button" style="width:250px; background-color:#e15f41">Submit</button>
+        }
+
         <form method="post" action="/Categories/Edit/@Model.CategoryId">
             @Html.HttpMethodOverride(HttpVerbs.Put)
 
@@ -30,5 +52,5 @@
             </button>
         </form>
     </div>
-</div>
+        </div>
 

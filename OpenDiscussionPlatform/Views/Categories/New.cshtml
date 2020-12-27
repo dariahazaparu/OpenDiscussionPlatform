@@ -7,12 +7,14 @@
 <br /><br />
 <div class="vertical-center" style="text-align:center;">
     <div class="container">
-        <h1 style="color:#333456;">Add a new country</h1>
-        <hr style="border:2px #d4a5a5 solid;" />
+        <h1 style="color:#303952;">
+        Add a new country
+        </h1>
+        <hr style="border:2px #e15f41 solid;" />
         @using (Html.BeginForm("New", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="form-group">
-                <h1 style="color:#14274e;">
+                <h1 style="color:#303952;">
                     @Html.Label("CategoryName", "Country name")
                 </h1>
 
@@ -23,12 +25,12 @@
                 @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
             </div>
             <br />
-            @*<div class="form-group">
-                <label>Alegeti un fisier</label>
+            <div class="form-group">
+                <label>Upload a picture</label>
                 <input type="file" name="uploadedFile" />
-            </div>*@
+            </div>
             <br />
-            <button type="submit" class="button" style="width:250px; background-color:#d4a5a5"><span class="glyphicon glyphicon-plus-sign">Add</span></button>
+            <button type="submit" class="button" style="width:250px; background-color:#e15f41"><span class="glyphicon glyphicon-plus-sign" style="color:white;">Add</span></button>
         }
     </div>
 </div>

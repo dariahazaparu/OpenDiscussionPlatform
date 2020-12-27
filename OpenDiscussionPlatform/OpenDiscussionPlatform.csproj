@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,6 +265,9 @@
     <Content Include="Views\Subjects\NewSel.cshtml" />
     <Content Include="Views\Subjects\Show.cshtml" />
     <Content Include="Views\Subjects\All.cshtml" />
+    <Content Include="Views\Users\All.cshtml" />
+    <Content Include="Views\Users\Info.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

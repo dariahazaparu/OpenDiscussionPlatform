@@ -1,0 +1,35 @@
+﻿@model OpenDiscussionPlatform.Models.ApplicationUser
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div>
+    Edit profile
+
+    <form method="post" action="/Users/Edit/Profile">
+        @Html.HttpMethodOverride(HttpVerbs.Put)
+        @Html.HiddenFor(m => m.Id)
+
+        @Html.LabelFor(m => m.Description)
+        @Html.Editor("Description", new { htmlAttributes = new { @class = "form-control" } })
+        <br />
+        @Html.LabelFor(m => m.FullName)
+        @Html.Editor("FullName", new { htmlAttributes = new { @class = "form-control" } })
+
+        <br />
+        @Html.LabelFor(m => m.FavFood)
+        @Html.Editor("FavFood", new { htmlAttributes = new { @class = "form-control" } })
+
+        <br />
+        @Html.LabelFor(m => m.School)
+        @Html.Editor("School", new { htmlAttributes = new { @class = "form-control" } })
+        <br />
+
+        @Html.LabelFor(m => m.City)
+        @Html.Editor("City", new { htmlAttributes = new { @class = "form-control" } })
+
+        <button type="submit" class="button" style="background-color:#e15f41;"><span style="color:white;">Submit</span></button>
+    </form>
+</div>
+

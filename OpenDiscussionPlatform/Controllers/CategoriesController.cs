@@ -56,32 +56,33 @@ namespace OpenDiscussion.Controllers
                 {
                     //Debug.WriteLine("ajtr valid");
 
-                    //if (uploadedFile.FileName != "")
-                    //{
-                    //    //Debug.WriteLine("ajtr");
+                    if (uploadedFile.FileName != "")
+                    {
+                        //Debug.WriteLine("ajtr");
 
-                    //    string uploadedFileName = uploadedFile.FileName;
-                    //    string uploadedFileExtension = Path.GetExtension(uploadedFileName);
+                        string uploadedFileName = uploadedFile.FileName;
+                        string uploadedFileExtension = Path.GetExtension(uploadedFileName);
 
-                    //    if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg" || uploadedFileExtension == ".pdf")
-                    //    {
-                    //        // Se stocheaza fisierul in folderul Files (folderul trebuie creat in proiect)
-                            
-                    //        string uploadFolderPath = Server.MapPath("~//Files//");
-                            
-                    //        uploadedFile.SaveAs(uploadFolderPath + uploadedFileName);
-                            
-                    //        FileUpload file = new FileUpload();
-                    //        file.Extension = uploadedFileExtension;
-                    //        file.FileName = uploadedFileName;
-                    //        file.FilePath = uploadFolderPath + uploadedFileName;
-                            
-                    //        db.FileUploads.Add(file);
-                    //        db.SaveChanges();
+                        if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg" || uploadedFileExtension == ".pdf")
+                        {
+                            // Se stocheaza fisierul in folderul Files (folderul trebuie creat in proiect)
 
-                    //        category.CategoryPicture = file.FileId;
-                    //    }
-                    //}
+                            string uploadFolderPath = Server.MapPath("~//Files//");
+
+                            uploadedFile.SaveAs(uploadFolderPath + uploadedFileName);
+
+                            FileUpload file = new FileUpload();
+                            file.Extension = uploadedFileExtension;
+                            file.FileName = uploadedFileName;
+                            file.FilePath = uploadFolderPath + uploadedFileName;
+
+                            db.FileUploads.Add(file);
+                            db.SaveChanges();
+
+                            category.CategoryPicture = file.FileId;
+                            category.File = file;
+                        }
+                    }
                     db.Categories.Add(category);
                     db.SaveChanges();
                     TempData["message"] = "A new topic has been added!";
@@ -109,7 +110,7 @@ namespace OpenDiscussion.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int id, Category requestCategory)
+        public ActionResult Edit(int id, Category requestCategory/*, HttpPostedFileBase uploadedFile*/)
         {
             try
             {
@@ -118,7 +119,39 @@ namespace OpenDiscussion.Controllers
                     Category category = db.Categories.Find(id);
                     if (TryUpdateModel(category))
                     {
+
+                    //    if (uploadedFile.FileName != "")
+                    //    {
+                    //        //Debug.WriteLine("ajtr");
+
+                    //        string uploadedFileName = uploadedFile.FileName;
+                    //        string uploadedFileExtension = Path.GetExtension(uploadedFileName);
+
+                    //        if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg" || uploadedFileExtension == ".pdf")
+                    //        {
+                    //            //string uploadFolderPath = Server.MapPath("~//Files//");
+                    //            FileUpload requestFile = db.FileUploads.Find(category.CategoryPicture);
+
+                                
+
+                    //            //uploadedFile.SaveAs(uploadFolderPath + uploadedFileName);
+
+                    //            //FileUpload file = new FileUpload();
+                    //            //file.Extension = uploadedFileExtension;
+                    //            //file.FileName = uploadedFileName;
+                    //            //file.FilePath = uploadFolderPath + uploadedFileName;
+
+                    //           // db.FileUploads.Add(file);
+                    //            db.SaveChanges();
+
+                    //            category.CategoryPicture = requestFile.FileId;
+                    //            category.File = requestFile;
+                    //        }
+                    //    }
+
                         category.CategoryName = requestCategory.CategoryName;
+                        //category.CategoryPicture = requestCategory.CategoryPicture;
+                        //category.File = requestCategory.File;
                         db.SaveChanges();
                         TempData["message"] = "The topic has been edited!";
                         
@@ -142,7 +175,9 @@ namespace OpenDiscussion.Controllers
         public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);
+            FileUpload file = db.FileUploads.Find(category.File.FileId);
             db.Categories.Remove(category);
+            db.FileUploads.Remove(file);
             db.SaveChanges();
             TempData["message"] = "The topic has been deleted!";
             return RedirectToAction("Index");

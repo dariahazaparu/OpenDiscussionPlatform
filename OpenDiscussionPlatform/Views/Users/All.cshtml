@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "All";
+}
+
+<h2>All</h2>
+<br />
+<br />
+
+@foreach (var user in ViewBag.UsersList)
+{
+    <span class="glyphicon glyphicon-user"></span>
+    <a href="/Users/Info/@user.Id"><h3>@user.UserName</h3></a>
+    <hr />
+
+}

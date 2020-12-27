@@ -50,13 +50,14 @@ namespace OpenDiscussion.Controllers
 
             //ViewBag.Subjects = subjects;
             ViewBag.Category = category;
-            //if (category.CategoryPicture != 0)
-            //{
-            //    var img = db.FileUploads.Find(category.CategoryPicture);
-            //    ViewBag.imgsrc = img.FileName;
-            //    Debug.WriteLine("ajtr imgsrc");
-
-            //}
+            Debug.WriteLine(category.CategoryId);
+            if (category.CategoryPicture != 0)
+            {
+                var img = db.FileUploads.Find(category.CategoryPicture);
+                Debug.WriteLine(img.FileId);
+                ViewBag.img = img;
+                Debug.WriteLine("ajtr imgsrc");
+            }
 
             return View();
         }
