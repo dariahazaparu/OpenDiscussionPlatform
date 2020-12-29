@@ -7,16 +7,16 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello, chef " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:#f7d794;" })
+            @Html.ActionLink("Hello, chef " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage"/*, @style = "color:#f7d794;"*/ })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:#f7d794;">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" @*style="color:#f7d794;"*@>Log off</a></li>
     </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @style = "color:#f7d794;" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @style = "color:#f7d794;" })</li>
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"/*, @style = "color:#f7d794;"*/ })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink"/*, @style = "color:#f7d794;"*/ })</li>
     </ul>
 }

@@ -22,6 +22,12 @@ namespace OpenDiscussionPlatform.Controllers
                         orderby user.UserName
                         select user;
             ViewBag.UsersList = users;
+
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+
             return View();
         }
 
@@ -48,6 +54,11 @@ namespace OpenDiscussionPlatform.Controllers
 
             var subjects = db.Subjects.Where(s => s.UserId == id);
             ViewBag.Subjects = subjects;
+
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
 
             return View(currUser);
 
@@ -98,6 +109,8 @@ namespace OpenDiscussionPlatform.Controllers
                     UserManager.AddToRole(id, selectedRole.Name);
 
                     db.SaveChanges();
+
+                    TempData["message"] = "The role has been edited!";
                 }
                 return RedirectToAction("Info");
             }
@@ -117,7 +130,7 @@ namespace OpenDiscussionPlatform.Controllers
             ViewBag.utilizatorCurent = User.Identity.GetUserId();
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User, Moderator, Admin")]
         public ActionResult Edit(string id)
         {
             SetAccessRightsUsers();
@@ -208,9 +221,12 @@ namespace OpenDiscussionPlatform.Controllers
 
             db.SaveChanges();
             UserManager.Delete(user);
+
+            
             TempData["message"] = "The user has been deleted!";
 
             return Redirect("/Users/All");
+            
         }
     }
 }

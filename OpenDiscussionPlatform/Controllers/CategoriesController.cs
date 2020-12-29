@@ -56,7 +56,7 @@ namespace OpenDiscussion.Controllers
                 {
                     //Debug.WriteLine("ajtr valid");
 
-                    if (uploadedFile.FileName != "")
+                    /*if (uploadedFile.FileName != "")
                     {
                         //Debug.WriteLine("ajtr");
 
@@ -82,10 +82,10 @@ namespace OpenDiscussion.Controllers
                             category.CategoryPicture = file.FileId;
                             category.File = file;
                         }
-                    }
+                    }*/
                     db.Categories.Add(category);
                     db.SaveChanges();
-                    TempData["message"] = "A new topic has been added!";
+                    TempData["message"] = "A new country has been added!";
                     return RedirectToAction("Index");
                 }
                 else
@@ -153,7 +153,7 @@ namespace OpenDiscussion.Controllers
                         //category.CategoryPicture = requestCategory.CategoryPicture;
                         //category.File = requestCategory.File;
                         db.SaveChanges();
-                        TempData["message"] = "The topic has been edited!";
+                        TempData["message"] = "The country has been edited!";
                         
                     }
                     return RedirectToAction("Index");
@@ -175,11 +175,11 @@ namespace OpenDiscussion.Controllers
         public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);
-            FileUpload file = db.FileUploads.Find(category.File.FileId);
+            //FileUpload file = db.FileUploads.Find(category.File.FileId);
             db.Categories.Remove(category);
-            db.FileUploads.Remove(file);
+            //db.FileUploads.Remove(file);
             db.SaveChanges();
-            TempData["message"] = "The topic has been deleted!";
+            TempData["message"] = "The country has been deleted!";
             return RedirectToAction("Index");
         }
 

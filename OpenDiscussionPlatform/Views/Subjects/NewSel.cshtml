@@ -19,10 +19,10 @@
                 @Html.TextBox("Title", null, new { @class = "form-control form-title" })
             </div>
             @Html.ValidationMessage("Title", null, new { @class = "text-danger" })
+            <br />
             <h2 style="color:#303952;">
                 @Html.Label("Content", "Details")
             </h2>
-            <h6 class="text-danger">Table not supported.</h6>
             <div style="text-align:initial;">
                 @Html.TextArea("Content", null, new { @class = "form-control form-content summernote" })
             </div>

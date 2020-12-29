@@ -29,7 +29,7 @@
         <div class="row">
             <h2 style="color:#e15f41;">
                 <strong>
-                    <span class="glyphicon glyphicon-chevron-right"></span> @subject.Category.CategoryName
+                    <span class="glyphicon glyphicon-bookmark"></span> @subject.Category.CategoryName
                 </strong>
                 <strong style="color:#303952;">
                     <span class="glyphicon glyphicon-chevron-right"></span> @subject.Title
@@ -75,7 +75,12 @@
     </div>
 }
 
-
+@if (ViewBag.lastPage == 0 && ViewBag.search != "")
+{
+    <h2 style="text-align:center;">There are no recipes matching your search!</h2>
+}
+else
+{
 <div style="text-align:center;">
     <nav aria-label="Page navigation">
         <ul class="costum">
@@ -119,3 +124,4 @@
         </ul>
     </nav>
 </div>
+}

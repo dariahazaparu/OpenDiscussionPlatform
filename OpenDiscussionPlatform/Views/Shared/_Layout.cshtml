@@ -18,21 +18,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Gourmet World Tour", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color: #f7d794;" })
+                @Html.ActionLink("Gourmet World Tour", "Index", "Home", new { area = "" }, new { @class = "navbar-brand font-logo", @style = "color: #f7d794;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("All users", "All", "Users", new { area = "" }, new { @style = "color: #f7d794;" }) </li>
+                        <li>@Html.ActionLink("All users", "All", "Users"/*, new { area = "" }, new { @style = "color: #f7d794;" }*/) </li>
                     }
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("My Profile", "Info", "Users", new { id = "Profile" }, new { @style = "color: #f7d794;" })</li>
+                        <li>@Html.ActionLink("My Profile", "Info", "Users", new { id = "Profile" }, null)</li>
                     }
-                    <li>@Html.ActionLink("Countries", "Index", "Categories", new { area = "" }, new { @style = "color: #f7d794;" })</li>
-                    <li>@Html.ActionLink("All recipes", "All", "Subjects", new { area = "" }, new { @style = "color: #f7d794;" })</li>
-                    <li>@Html.ActionLink("Contact us", "Contact", "Home", new { area = "" }, new { @style = "color: #f7d794;" })</li>
+                    <li>@Html.ActionLink("Countries", "Index", "Categories"/*, new { area = "" }, new { @style = "color: #f7d794;" }*/)</li>
+                    <li>@Html.ActionLink("All recipes", "All", "Subjects"/*, new { area = "" }, new { @style = "color: #f7d794;" }*/)</li>
+                    <li>@Html.ActionLink("Contact us", "Contact", "Home"/*, new { area = "" }, new { @style = "color: #f7d794;" }*/)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -41,8 +41,8 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Gourmet World Tour</p>
+        <footer >
+            <p>&copy; @DateTime.Now.Year - <span class="font-logo">Gourmet World Tour</span></p>
         </footer>
     </div>
 

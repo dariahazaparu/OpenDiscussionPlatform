@@ -204,7 +204,7 @@ namespace OpenDiscussion.Controllers
 
                     db.Subjects.Add(subject);
                     db.SaveChanges();
-                    TempData["message"] = "The subject has been added!";
+                    TempData["message"] = "The recipe has been added!";
                     return Redirect("/Subjects/Index/" + subject.CategoryId);
                 }
                 else
@@ -245,7 +245,7 @@ namespace OpenDiscussion.Controllers
                     subject.Content = Sanitizer.GetSafeHtmlFragment(subject.Content);
                     db.Subjects.Add(subject);
                     db.SaveChanges();
-                    TempData["message"] = "The subject has been added!";
+                    TempData["message"] = "The recipe has been added!";
                     return Redirect("/Subjects/Index/" + subject.CategoryId);
                 }
                 else
@@ -273,7 +273,7 @@ namespace OpenDiscussion.Controllers
             }
             else
             {
-                TempData["message"] = "You are not allowed to edit this subject";
+                TempData["message"] = "You are not allowed to edit this recipe";
                 return Redirect("/Subjects/Index/" + subject.CategoryId);
             }
         }
@@ -301,14 +301,14 @@ namespace OpenDiscussion.Controllers
                             subject.Date = requestSubject.Date;
                             subject.CategoryId = requestSubject.CategoryId;
                             db.SaveChanges();
-                            TempData["message"] = "The subject has been edited!";
+                            TempData["message"] = "The recipe has been edited!";
 
                         }
                         return Redirect("/Subjects/Index/" + subject.CategoryId);
                     }
                     else
                     {
-                        TempData["message"] = "You are not allowed to edit this subject";
+                        TempData["message"] = "You are not allowed to edit this recipe";
                         return Redirect("/Subjects/Index/" + subject.CategoryId);
                     }
                 }
@@ -334,12 +334,12 @@ namespace OpenDiscussion.Controllers
             {
                 db.Subjects.Remove(subject);
                 db.SaveChanges();
-                TempData["message"] = "The subject has been deleted!";
+                TempData["message"] = "The recipe has been deleted!";
                 return Redirect("/Subjects/Index/" + subject.CategoryId);
             }
             else
             {
-                TempData["message"] = "You are not allowed to delete this subject";
+                TempData["message"] = "You are not allowed to delete this recipe";
                 return Redirect("/Subjects/Index/" + subject.CategoryId);
             }
         }

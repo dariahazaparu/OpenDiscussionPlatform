@@ -4,13 +4,6 @@
     ViewBag.Title = Model.Title;
 }
 
-<br />
-
-<div class="container">
-    <div class="row">
-       <a href="/Subjects/Index/@Model.CategoryId" class="btn btn-lg" style="color: #303952;"><span class="glyphicon glyphicon-hand-left"> Back to recipes</span></a>
-    </div>
-</div>
 
 <br />
 
@@ -60,56 +53,6 @@
 }
 
 <hr style="border:2px #e15f41 solid;" />
-<div class="container">
-    @foreach (var comm in Model.Comments)
-    {
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-1">
-            <h1><span class="glyphicon glyphicon-comment" style="color: #303952;"></span></h1>
-        </div>
-        <div class="col-sm-8">
-            <blockquote style="border-left: 2px solid #303952;">
-                <h5 style="color: #303952;">@comm.CommContent</h5>
-                <footer>
-                    <sm class="pull-right"> by <a href="/Users/Info/@comm.UserId" style="color:#e15f41;">@comm.User.UserName</a></sm>
-                    <br />
-                    <sm class="pull-right"> at @comm.Date</sm>
-                </footer>
-            </blockquote>
-        </div>
-        @if (comm.UserId == ViewBag.utilizatorCurent)
-        {
-            <div class="col-sm-1">
-                <div style="display: inline-block; padding-top:40%; float:right;">
-                    <button class="button-mic" style="background-color:#cf6a87;">
-                        <a href="/Comments/Edit/@comm.CommentId">
-                            <span class="glyphicon glyphicon-edit" style="color:white;"></span>
-                        </a>
-                    </button>
-                </div>
-            </div>
-        }
-        @if (comm.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
-        { 
-            <div class="col-sm-1">
-                <div style="display: inline-block;  padding-top:40%;  float:left;">
-                    <form method="post" action="/Comments/Delete/@comm.CommentId">
-                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button type="submit" class="button-mic" style="background-color:#e15f41;">
-                            <span class="glyphicon glyphicon-trash" style="color:white;"></span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-         }
-        </div>
-        <br />
-        <hr style="border:1.5px #f19066 solid;" />
-
-    }
-</div>
-<br />
 
 @if (ViewBag.esteUser)
 {
@@ -137,14 +80,73 @@
                 <div class="col-sm-9"></div>
                 <div class="col-sm-1">
                     <button type="submit" class="button pull-right" style="background-color: #574b90; margin:0px; color:white; font-size:20px; width:120px; ">
-                        <span class="glyphicon glyphicon-check" > Post</span>
+                        <span class="glyphicon glyphicon-check"> Post</span>
                     </button>
                 </div>
                 <div class="col-sm-2"></div>
             </div>
         </form>
     </div>
+    <br />
+    <hr style="border:2px #e15f41 solid;" />
 }
+
+
+<div class="container">
+    @foreach (var comm in Model.Comments.OrderByDescending(o => o.Date))
+    {
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-1">
+            <h1><span class="glyphicon glyphicon-comment" style="color: #303952;"></span></h1>
+        </div>
+        <div class="col-sm-8">
+            <blockquote style="border-left: 2px solid #303952;">
+                <h5 style="color: #303952;">@comm.CommContent</h5>
+                <footer>
+                    <sm class="pull-right"> by <a href="/Users/Info/@comm.UserId" style="color:#e15f41;">@comm.User.UserName</a></sm>
+                    <br />
+                    <sm class="pull-right"> at @comm.Date</sm>
+                </footer>
+            </blockquote>
+        </div>
+
+        @if (comm.UserId == ViewBag.utilizatorCurent || ViewBag.esteModerator)
+        {
+            <div class="col-sm-1">
+                <div style="display: inline-block;  padding-top:40%;  ">
+                    <form method="post" action="/Comments/Delete/@comm.CommentId">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="button-mic" style="background-color:#e15f41;">
+                            <span class="glyphicon glyphicon-trash" style="color:white;"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        @if (comm.UserId == ViewBag.utilizatorCurent)
+        {
+            <div class="col-sm-1">
+                <div style="display: inline-block; padding-top:40%; ">
+                    <button class="button-mic" style="background-color:#cf6a87;">
+                        <a href="/Comments/Edit/@comm.CommentId">
+                            <span class="glyphicon glyphicon-edit" style="color:white;"></span>
+                        </a>
+                    </button>
+                </div>
+            </div>
+        }
+
+    </div>
+        <br />
+        <hr style="border:1.5px #f19066 solid;" />
+
+    }
+</div>
+<br />
+
+
 <div>
     <div>
 

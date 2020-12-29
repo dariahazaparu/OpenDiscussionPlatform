@@ -3,14 +3,23 @@
     ViewBag.Title = "All";
 }
 
-<h2>All</h2>
+@if (ViewBag.Message != null)
+{
+    <hr style="border:2px #303952 solid;" />
+    <div class="text-center">
+        <h3>@ViewBag.Message</h3>
+    </div>
+    <hr style="border:2px #303952 solid;" />
+}
+
 <br />
-<br />
+<h2 class="text-center" style=" font-size:40px; color: #303952;">Users</h2>
+
+<hr style="border:2px #e15f41 solid; margin-top:2em;" />
 
 @foreach (var user in ViewBag.UsersList)
 {
-    <span class="glyphicon glyphicon-user"></span>
-    <a href="/Users/Info/@user.Id"><h3>@user.UserName</h3></a>
-    <hr />
+    <h3 class=" text-center"><span class="glyphicon glyphicon-user" style="color: #303952;"></span><a href="/Users/Info/@user.Id">   @user.UserName</a></h3>
+    <hr style="border:2px #e15f41 solid; margin-top:2em;" />
 
 }

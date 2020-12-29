@@ -1,23 +1,52 @@
-﻿body {
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Permanent+Marker&family=Roboto&display=swap');
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     background: rgb(247,215,148);
     background: linear-gradient(135deg, rgba(247,215,148,1) 0%, rgba(255,177,204,1) 100%);
+ 
 }
+
+.nav a {
+    color: #f7d794;
+    
+}
+
+
+    .nav a:hover {
+        background: #f7d794;
+        color: #303952;
+    }
+
+.font-logo {
+    font-family: 'Permanent Marker', cursive;
+}
+
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow-x: hidden;
+}
+
 
 .form-content {
     display: initial;
     height: 200px;
     width: 100%;
     max-width: 100%;
-    background-color: transparent;
+    background-color: white;
     border-color: #d4a5a5;
     transition: none;
 }
 
 .form-title {
     display: initial;
-    background-color: transparent;
+    background-color: white;
     border-color: transparent;
     box-shadow: none;
     text-align: center;
@@ -26,14 +55,15 @@
 }
 
 .div-title {
-    border: 2px #f19066 dashed;
-    width: 30%;
+   
+    width: 25%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
     transition: none;
 }
+
 
 .button {
     display: inline-block;

@@ -4,32 +4,65 @@
 }
 
 
-<div>
-    Edit profile
+<div style="text-align:center;">
+    <div class="container">
 
-    <form method="post" action="/Users/Edit/Profile">
-        @Html.HttpMethodOverride(HttpVerbs.Put)
-        @Html.HiddenFor(m => m.Id)
+        <h1 style="color:#303952;">
+            Edit your profile
+        </h1>
 
-        @Html.LabelFor(m => m.Description)
-        @Html.Editor("Description", new { htmlAttributes = new { @class = "form-control" } })
-        <br />
-        @Html.LabelFor(m => m.FullName)
-        @Html.Editor("FullName", new { htmlAttributes = new { @class = "form-control" } })
+        <hr style="border:2px #e15f41 solid;" />
 
-        <br />
-        @Html.LabelFor(m => m.FavFood)
-        @Html.Editor("FavFood", new { htmlAttributes = new { @class = "form-control" } })
+        <form method="post" action="/Users/Edit/Profile">
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+            @Html.HiddenFor(m => m.Id)
 
-        <br />
-        @Html.LabelFor(m => m.School)
-        @Html.Editor("School", new { htmlAttributes = new { @class = "form-control" } })
-        <br />
+            <h1 style="color:#303952;">
+                @Html.LabelFor(m => m.Description)
+            </h1>
+            <div class=" div-title">
+                @Html.Editor("Description", new { htmlAttributes = new { @class = "form-control form-title" } })
+            </div>
 
-        @Html.LabelFor(m => m.City)
-        @Html.Editor("City", new { htmlAttributes = new { @class = "form-control" } })
+            <br />
 
-        <button type="submit" class="button" style="background-color:#e15f41;"><span style="color:white;">Submit</span></button>
-    </form>
+            <h1 style="color:#303952;">
+                @Html.Label("FullName", "Full Name")
+            </h1>
+            <div class="div-title">
+                @Html.Editor("FullName", new { htmlAttributes = new { @class = "form-control form-title" } })
+            </div>
+
+            <br />
+
+            <h1 style="color:#303952;">
+                @Html.Label("FavFood", "Favourite Food")
+            </h1>
+            <div class="div-title">
+                @Html.Editor("FavFood", new { htmlAttributes = new { @class = "form-control form-title" } })
+            </div>
+
+            <br />
+
+            <h1 style="color:#303952;">
+                @Html.LabelFor(m => m.School)
+            </h1>
+            <div class="div-title">
+                @Html.Editor("School", new { htmlAttributes = new { @class = "form-control form-title" } })
+            </div>
+
+            <br />
+
+            <h1 style="color:#303952;">
+                @Html.LabelFor(m => m.City)
+            </h1>
+            <div class="div-title">
+                @Html.Editor("City", new { htmlAttributes = new { @class = "form-control form-title" } })
+            </div>
+
+            <br />
+            <button type="submit" class="button" style="background-color:#e15f41;"><span style="color:white;">Submit</span></button>
+        </form>
+    </div>
 </div>
 
