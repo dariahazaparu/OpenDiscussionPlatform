@@ -25,7 +25,6 @@ namespace OpenDiscussion.Controllers
             Category category = db.Categories.Find(id);
             var subjects = category.Subjects;
 
-            //var subjects = db.Subjects.Include("Category").Include("User").OrderBy(a => a.Date);
             var totalItems = subjects.Count();
             var currentPage = Convert.ToInt32(Request.Params.Get("page"));
             var offset = 0;
@@ -42,33 +41,45 @@ namespace OpenDiscussion.Controllers
                 ViewBag.message = TempData["message"].ToString();
             }
 
-            //ViewBag.perPage = this._perPage;
             ViewBag.total = totalItems;
             ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
             ViewBag.Subjects = paginatedSubjects;
-            ViewBag.currPage = currentPage; //?????
+            ViewBag.currPage = currentPage;
 
-            //ViewBag.Subjects = subjects;
             ViewBag.Category = category;
-            Debug.WriteLine(category.CategoryId);
-            if (category.CategoryPicture != 0)
-            {
-                var img = db.FileUploads.Find(category.CategoryPicture);
-                Debug.WriteLine(img.FileId);
-                ViewBag.img = img;
-                Debug.WriteLine("ajtr imgsrc");
-            }
+
+            ViewBag.files = from file in db.FileUploads
+                           select file;
 
             return View();
         }
 
-        public ActionResult All ()
+        public ActionResult All (int? id)
         {
             SetAccessRightsSubjects();
-            var subjects = db.Subjects.Include("Category").Include("User").OrderBy(a => a.Date);
-            var search = "";
+            var subjects = db.Subjects.Include("Category").Include("User").OrderByDescending(a => a.Date);
+            ViewBag.id = id;
+            //sort
+            if (id == 1) // oldest first
+            {
+                subjects = subjects.OrderBy(a => a.Date);
+            }
+            else if (id == 2) // A first
+            {
+                subjects = subjects.OrderBy(a => a.Title);
 
-            if(Request.Params.Get("search") != null)
+            } else if (id == 3) // Z first
+            {
+                subjects = subjects.OrderByDescending(a => a.Title);
+
+            } else // newest first
+            {
+                subjects = subjects.OrderByDescending(a => a.Date);
+            }
+
+            //search
+            var search = "";
+            if (Request.Params.Get("search") != null)
             {
                 search = Request.Params.Get("search").Trim();
                 List<int> subjectIds = db.Subjects.Where(
@@ -81,9 +92,27 @@ namespace OpenDiscussion.Controllers
 
                 List<int> Ids = subjectIds.Union(commentIds).ToList();
 
-               subjects = db.Subjects.Include("Category").Include("User").Where(subj => Ids.Contains(subj.SubjectId)).OrderBy(a => a.Date);
+                //sort
+                if (id == 1)
+                {
+                    subjects = db.Subjects.Include("Category").Include("User").Where(subj => Ids.Contains(subj.SubjectId)).OrderBy(a => a.Date);
+                }
+                else if (id == 2)
+                {
+                    subjects = db.Subjects.Include("Category").Include("User").Where(subj => Ids.Contains(subj.SubjectId)).OrderBy(a => a.Title);
+                }
+                else if (id == 3)
+                {
+                    subjects = db.Subjects.Include("Category").Include("User").Where(subj => Ids.Contains(subj.SubjectId)).OrderByDescending(a => a.Title);
+                }
+                else 
+                {
+                    subjects = db.Subjects.Include("Category").Include("User").Where(subj => Ids.Contains(subj.SubjectId)).OrderByDescending(a => a.Date);
+                }
             }
+            ViewBag.SearchString = search;
 
+            //pagination
             var totalItems = subjects.Count();
             var currentPage = Convert.ToInt32(Request.Params.Get("page"));
             var offset = 0;
@@ -92,7 +121,6 @@ namespace OpenDiscussion.Controllers
             {
                 offset = (currentPage - 1) * this._perPage;
             }
-
             var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
 
             if (TempData.ContainsKey("message"))
@@ -103,7 +131,6 @@ namespace OpenDiscussion.Controllers
             ViewBag.total = totalItems;
             ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
             ViewBag.Subjects = paginatedSubjects;
-            ViewBag.SearchString = search;
 
             return View();
         }

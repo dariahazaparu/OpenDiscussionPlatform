@@ -4,6 +4,7 @@ using OpenDiscussionPlatform.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,8 +36,6 @@ namespace OpenDiscussionPlatform.Controllers
         public ActionResult Info(string id)
         {
             SetAccessRightsUsers();
-            Debug.WriteLine(id);
-            Debug.WriteLine(User.Identity.GetUserId());
             if (id == User.Identity.GetUserId())
             {
                 return Redirect("/Users/Info/Profile");
@@ -154,7 +153,7 @@ namespace OpenDiscussionPlatform.Controllers
         [HttpPut]
         [Authorize(Roles = "User")]
         [ValidateInput(false)]
-        public ActionResult Edit (string id, ApplicationUser reqUser)
+        public ActionResult Edit (string id, ApplicationUser reqUser, HttpPostedFileBase reqUploadedFile)
         {
             SetAccessRightsUsers();
             try
@@ -171,6 +170,45 @@ namespace OpenDiscussionPlatform.Controllers
                     {
                         if (TryValidateModel(user))
                         {
+                            //Debug.WriteLine(reqUploadedFile.FileName);
+                            //if (reqUploadedFile != null)
+                            //{
+                                //Debug.WriteLine(user.PhotoId);
+                                //string uploadedFileName = reqUploadedFile.FileName;
+                                //string uploadedFileExtension = Path.GetExtension(uploadedFileName);
+
+                                //if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg")
+                                //{
+                                //    if (user.PhotoId != 0)
+                                //    {
+                                //        // edit
+                                //        var file = db.FileUploads.Find(user.PhotoId);
+                                //        file.FileName = uploadedFileName;
+                                //        file.Extension = uploadedFileExtension;
+                                //        file.FilePath = Server.MapPath("~//Files//") + uploadedFileName;
+
+                                //        user.Photo = file;
+                                //        db.SaveChanges();
+                                //    }
+                                //    else
+                                //    {
+                                //        //add
+                                //        string uploadedFolderPath = Server.MapPath("~//Files//");
+                                //        reqUploadedFile.SaveAs(uploadedFolderPath + uploadedFileName);
+
+                                //        FileUpload file = new FileUpload();
+                                //        file.Extension = uploadedFileExtension;
+                                //        file.FileName = uploadedFileName;
+                                //        file.FileName = uploadedFolderPath + uploadedFileName;
+                                        
+                                //        db.FileUploads.Add(file);
+                                //        db.SaveChanges();
+
+                                //        user.PhotoId = file.FileId;
+                                //        user.Photo = file;
+                                //    }
+                                //}
+                            //}
                             user.School = reqUser.School;
                             user.Description = reqUser.Description;
                             user.City = reqUser.City;

@@ -14,15 +14,14 @@ body {
 }
 
 
-    .nav a:hover {
-        background: #f7d794;
-        color: #303952;
-    }
+.nav a:hover {
+    background: #f7d794;
+    color: #303952;
+}
 
 .font-logo {
     font-family: 'Permanent Marker', cursive;
 }
-
 
 html, body {
     width: 100%;
@@ -200,4 +199,16 @@ textarea {
     vertical-align: middle;
     border-radius: 10px;
     margin-top: 10%;
+}
+
+.cont {
+    position: relative;
+}
+
+.center-c {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
 }

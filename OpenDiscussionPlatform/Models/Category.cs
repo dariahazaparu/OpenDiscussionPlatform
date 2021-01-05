@@ -16,6 +16,7 @@ namespace OpenDiscussion.Models
         [StringLength(25, ErrorMessage = "The name must not be longer than 25 characters!")]
         public string CategoryName { get; set; }
 
+        [Required]
         public int CategoryPicture { get; set; }
         public virtual FileUpload File { get; set; }
 

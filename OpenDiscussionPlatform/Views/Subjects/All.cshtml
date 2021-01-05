@@ -2,26 +2,46 @@
     ViewBag.Title = "All";
 }
 
-
+<br />
 <div class="container">
     <div class="row">
         <br />
-        <div class="col-sm-3"></div>
+        <div class="col-sm-3" style="text-align:center; height: 50px; padding-left:50px; padding-right:50px;">
+            <div style="color:#303952;"><b>Order by date:</b></div>
+            <br />
+            <div style="float:left;">
+                <a class="btn btn-secondary active" href="/Subjects/All" style="color:#e15f41;">Newer</a>
+            </div>
+            <div style="float:right;">
+                <a class="btn btn-secondary active" href="/Subjects/All/1" style="color:#e15f41;">Older</a>
+            </div>
+        </div>
         <form class="card card-sm" method="GET">
-            <div class="col-sm-3">
+            <div class="col-sm-3" style="text-align:center; height: 50px; margin-left:50px;">
                 <input class="form-control form-control-lg form-control-borderless" type="text" name="search" value="@ViewBag.SearchString"
                        placeholder="Search keywords" style="height:40px;">
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2" style="height: 50px;">
                 <button type="submit" class="button" style="background-color:#574b90; margin: 0; width:100px; height: 40px; font-size:18px;">
                     <span class="glyphicon glyphicon-search" style="color:white;"></span>
                 </button>
             </div>
-            <div class="col-sm-3"></div>
+            <div class="col-sm-3" style="text-align:center; height: 50px; padding-left:50px; padding-right:50px;">
+                <div style="color:#303952;"><b>Order by title:</b></div>
+                <br />
+                <div style="float:left;">
+                    <a class="btn btn-secondary active" href="/Subjects/All/2" style="color:#e15f41;">A->Z</a>
+                </div>
+                <div style="float:right;">
+                    <a class="btn btn-secondary active" href="/Subjects/All/3" style="color:#e15f41;">Z->A</a>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
         </form>
     </div>
 </div>
-<br />
+
+<br /><br />
 
 @foreach (var subject in ViewBag.Subjects)
 {
@@ -77,51 +97,52 @@
 
 @if (ViewBag.lastPage == 0 && ViewBag.search != "")
 {
-    <h2 style="text-align:center;">There are no recipes matching your search!</h2>
+    <h2 style="text-align:center; color:#303952;">There are no recipes matching your search!</h2>
 }
 else
 {
-<div style="text-align:center;">
-    <nav aria-label="Page navigation">
-        <ul class="costum">
-            <li>
-                @if (ViewBag.search != "")
-                {<a href="/Subjects/All?page=1&search=@ViewBag.SearchString" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                }
-                else
+    <div style="text-align:center;">
+        <nav aria-label="Page navigation">
+            <ul class="costum">
+                <li>
+                    @if (ViewBag.search != "")
+                    {
+                        <a href="?page=1&search=@ViewBag.SearchString" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="?page=1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    }
+                </li>
+                @for (int i = 1; i <= ViewBag.lastPage; i++)
                 {
-                    <a href="/Subjects/All?page=1" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
+                    if (ViewBag.search != "")
+                    {
+                        <li><a href="?page=@i&search=@ViewBag.SearchString">@(i)</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="?page=@i">@(i)</a></li>
+                    }
                 }
-            </li>
-            @for (int i = 1; i <= ViewBag.lastPage; i++)
-            {
-                if (ViewBag.search != "")
-                {
-                    <li><a href="/Subjects/All?page=@i&search=@ViewBag.SearchString">@(i)</a></li>
-                }
-                else
-                {
-                    <li><a href="/Subjects/All?page=@i">@(i)</a></li>
-                }
-            }
-            <li>
-                @if (ViewBag.search != "")
-                {
-                    <a href="/Subjects/All?page=@(ViewBag.lastPage)&search=@ViewBag.SearchString" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                }
-                else
-                { <a href="/Subjects/All?page=@(ViewBag.lastPage)" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                }
-            </li>
-        </ul>
-    </nav>
-</div>
+                <li>
+                    @if (ViewBag.search != "")
+                    {
+                        <a href="?page=@(ViewBag.lastPage)&search=@ViewBag.SearchString" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    }
+                    else
+                    { <a href="?page=@(ViewBag.lastPage)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    }
+                </li>
+            </ul>
+        </nav>
+    </div>
 }

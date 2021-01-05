@@ -22,6 +22,9 @@ namespace OpenDiscussionPlatform.Models
             return userIdentity;
         }
 
+        //public int PhotoId { get; set; }
+        //public virtual FileUpload Photo { get; set; }
+
         public string Description { get; set; }
 
         public string FullName { get; set; }

@@ -54,18 +54,14 @@ namespace OpenDiscussion.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //Debug.WriteLine("ajtr valid");
-
-                    /*if (uploadedFile.FileName != "")
+                    if (uploadedFile.FileName != "")
                     {
-                        //Debug.WriteLine("ajtr");
-
                         string uploadedFileName = uploadedFile.FileName;
                         string uploadedFileExtension = Path.GetExtension(uploadedFileName);
 
-                        if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg" || uploadedFileExtension == ".pdf")
+                        if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg")
                         {
-                            // Se stocheaza fisierul in folderul Files (folderul trebuie creat in proiect)
+                            // Se stocheaza fisierul in folderul Files
 
                             string uploadFolderPath = Server.MapPath("~//Files//");
 
@@ -82,7 +78,7 @@ namespace OpenDiscussion.Controllers
                             category.CategoryPicture = file.FileId;
                             category.File = file;
                         }
-                    }*/
+                    }
                     db.Categories.Add(category);
                     db.SaveChanges();
                     TempData["message"] = "A new country has been added!";
@@ -110,7 +106,7 @@ namespace OpenDiscussion.Controllers
 
         [HttpPut]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int id, Category requestCategory/*, HttpPostedFileBase uploadedFile*/)
+        public ActionResult Edit(int id, Category requestCategory, HttpPostedFileBase reqUploadedFile)
         {
             try
             {
@@ -119,39 +115,25 @@ namespace OpenDiscussion.Controllers
                     Category category = db.Categories.Find(id);
                     if (TryUpdateModel(category))
                     {
+                        if (reqUploadedFile != null)
+                        {
 
-                    //    if (uploadedFile.FileName != "")
-                    //    {
-                    //        //Debug.WriteLine("ajtr");
+                            string uploadedFileName = reqUploadedFile.FileName;
+                            string uploadedFileExtension = Path.GetExtension(uploadedFileName);
 
-                    //        string uploadedFileName = uploadedFile.FileName;
-                    //        string uploadedFileExtension = Path.GetExtension(uploadedFileName);
+                            if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg")
+                            {
+                                var file = db.FileUploads.Find(category.CategoryPicture);
+                                file.FileName = uploadedFileName;
+                                file.Extension = uploadedFileExtension;
+                                file.FilePath = Server.MapPath("~//Files//") + uploadedFileName;
 
-                    //        if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg" || uploadedFileExtension == ".pdf")
-                    //        {
-                    //            //string uploadFolderPath = Server.MapPath("~//Files//");
-                    //            FileUpload requestFile = db.FileUploads.Find(category.CategoryPicture);
-
-                                
-
-                    //            //uploadedFile.SaveAs(uploadFolderPath + uploadedFileName);
-
-                    //            //FileUpload file = new FileUpload();
-                    //            //file.Extension = uploadedFileExtension;
-                    //            //file.FileName = uploadedFileName;
-                    //            //file.FilePath = uploadFolderPath + uploadedFileName;
-
-                    //           // db.FileUploads.Add(file);
-                    //            db.SaveChanges();
-
-                    //            category.CategoryPicture = requestFile.FileId;
-                    //            category.File = requestFile;
-                    //        }
-                    //    }
+                                category.File = file;
+                                db.SaveChanges();
+                            }
+                        }
 
                         category.CategoryName = requestCategory.CategoryName;
-                        //category.CategoryPicture = requestCategory.CategoryPicture;
-                        //category.File = requestCategory.File;
                         db.SaveChanges();
                         TempData["message"] = "The country has been edited!";
                         
@@ -175,9 +157,9 @@ namespace OpenDiscussion.Controllers
         public ActionResult Delete(int id)
         {
             Category category = db.Categories.Find(id);
-            //FileUpload file = db.FileUploads.Find(category.File.FileId);
+            FileUpload file = db.FileUploads.Find(category.CategoryPicture);
             db.Categories.Remove(category);
-            //db.FileUploads.Remove(file);
+            db.FileUploads.Remove(file);
             db.SaveChanges();
             TempData["message"] = "The country has been deleted!";
             return RedirectToAction("Index");
