@@ -3,19 +3,23 @@
 }
 
 <hr style="border:2px #e15f41 solid;" />
-
-@foreach (var file in ViewBag.files)
-{
-    if (file.FileId == ViewBag.Category.CategoryPicture)
+<div class="cont">
+    @foreach (var file in ViewBag.files)
     {
-        <div class="cont">
+        if (file.FileId == ViewBag.Category.CategoryPicture)
+        {
             <img src="/Files/@file.FileName" style="height:70vh; margin-left:10%;margin-right:10%; width:80%; opacity:0.5;" />
-            <div class="center-c">
-                <h1 style="color:#303952; font-size:50px;"><large><strong>@ViewBag.Category.CategoryName</strong></large></h1>
-            </div>
-        </div>
+        }
     }
-}
+    <div class="center-c">
+        <h1 style="color:#303952; font-size:50px;">
+            <span class="glyphicon glyphicon-bookmark"></span>
+            <large><strong>@ViewBag.Category.CategoryName</strong></large>
+        </h1>
+    </div>
+    <br />
+</div>
+
 <hr style="border:2px #e15f41 solid;" />
 
 @if (ViewBag.Message != null)
@@ -93,8 +97,6 @@
 <br />
 <br />
 
-
-
 @if (ViewBag.lastPage != 0)
 {
     <div style="text-align:center;">
@@ -120,6 +122,4 @@
         </nav>
     </div>
 }
-
 <br />
-

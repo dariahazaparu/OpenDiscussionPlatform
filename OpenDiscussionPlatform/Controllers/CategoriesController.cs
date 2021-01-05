@@ -54,7 +54,7 @@ namespace OpenDiscussion.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (uploadedFile.FileName != "")
+                    if (uploadedFile != null)
                     {
                         string uploadedFileName = uploadedFile.FileName;
                         string uploadedFileExtension = Path.GetExtension(uploadedFileName);
@@ -91,7 +91,6 @@ namespace OpenDiscussion.Controllers
             }
             catch (Exception e)
             {
-                //Debug.WriteLine("ajtr exceptie");
                 return View(category);
             }
         }
@@ -117,26 +116,45 @@ namespace OpenDiscussion.Controllers
                     {
                         if (reqUploadedFile != null)
                         {
-
                             string uploadedFileName = reqUploadedFile.FileName;
                             string uploadedFileExtension = Path.GetExtension(uploadedFileName);
 
                             if (uploadedFileExtension == ".png" || uploadedFileExtension == ".jpg")
                             {
-                                var file = db.FileUploads.Find(category.CategoryPicture);
-                                file.FileName = uploadedFileName;
-                                file.Extension = uploadedFileExtension;
-                                file.FilePath = Server.MapPath("~//Files//") + uploadedFileName;
+                                string uploadFolderPath = Server.MapPath("~//Files//");
 
-                                category.File = file;
-                                db.SaveChanges();
+                                reqUploadedFile.SaveAs(uploadFolderPath + uploadedFileName);
+
+                                if (category.File != null)
+                                {
+                                    var file = db.FileUploads.Find(category.CategoryPicture);
+                                    file.FileName = uploadedFileName;
+                                    file.Extension = uploadedFileExtension;
+                                    file.FilePath = uploadFolderPath + uploadedFileName;
+
+                                    category.File = file;
+                                    db.SaveChanges();
+
+                                }
+                                else
+                                {
+                                    FileUpload file = new FileUpload();
+                                    file.Extension = uploadedFileExtension;
+                                    file.FileName = uploadedFileName;
+                                    file.FilePath = uploadFolderPath + uploadedFileName;
+
+                                    db.FileUploads.Add(file);
+                                    db.SaveChanges();
+
+                                    category.CategoryPicture = file.FileId;
+                                    category.File = file;
+                                }
                             }
                         }
 
                         category.CategoryName = requestCategory.CategoryName;
                         db.SaveChanges();
                         TempData["message"] = "The country has been edited!";
-                        
                     }
                     return RedirectToAction("Index");
                 }
