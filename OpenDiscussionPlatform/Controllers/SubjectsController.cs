@@ -23,7 +23,7 @@ namespace OpenDiscussion.Controllers
             SetAccessRightsSubjects();
 
             Category category = db.Categories.Find(id);
-            var subjects = category.Subjects;
+            var subjects = category.Subjects.OrderByDescending(a => a.Date);
 
             var totalItems = subjects.Count();
             var currentPage = Convert.ToInt32(Request.Params.Get("page"));

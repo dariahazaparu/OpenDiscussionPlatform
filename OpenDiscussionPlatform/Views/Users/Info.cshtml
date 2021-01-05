@@ -85,7 +85,7 @@
             <br />
         }
 
-        @if (User.IsInRole("Admin"))
+        @if (User.IsInRole("Admin") && Model.Id != ViewBag.utilizatorCurent)
         {
 
             <form method="post" action="/Users/Delete/@Model.Id">

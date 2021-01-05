@@ -13,24 +13,31 @@
         <hr style="border:2px #e15f41 solid;" />
         @using (Html.BeginForm("New", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <div class="form-group">
-                <h1 style="color:#303952;">
-                    @Html.Label("CategoryName", "Country name")
-                </h1>
+        <div class="form-group">
+            <h1 style="color:#303952;">
+                @Html.Label("CategoryName", "Country name")
+            </h1>
 
-                <div class="div-title">
-                    @Html.TextBox("CategoryName", null, new { @class = "form-control form-title" })
-                </div>
-
-                @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
+            <div class="div-title">
+                @Html.TextBox("CategoryName", null, new { @class = "form-control form-title" })
             </div>
-            <br />
-            <div class="form-group">
+
+            @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
+
+            <h1 style="color:#303952;">
                 <label>Upload a picture</label>
+            </h1>
+
+            <div class="div-title" style="padding-left:50px;">
                 <input type="file" name="uploadedFile" />
             </div>
-            <br />
-            <button type="submit" class="button" style="width:250px; background-color:#e15f41"><span class="glyphicon glyphicon-plus-sign" style="color:white;">Add</span></button>
+
+            @Html.ValidationMessage("CategoryPicture", null, new { @class = "text-danger" })
+
+        </div>
+        <br />
+            
+        <button type="submit" class="button" style="width:250px; background-color:#e15f41"><span class="glyphicon glyphicon-plus-sign" style="color:white;">Add</span></button>
         }
     </div>
 </div>

@@ -15,23 +15,29 @@
         {
             @Html.HttpMethodOverride(HttpVerbs.Put)
             @Html.HiddenFor(m => m.CategoryId)
-            <div class="form-group">
-                <h1>
-                    @Html.Label("CategoryName", "Country name")
-                </h1>
+        <div class="form-group">
+            <h1 style="color:#303952;">
+                @Html.Label("CategoryName", "Country name")
+            </h1>
 
-                <div class="div-title">
-                    @Html.Editor("CategoryName", new { htmlAttributes = new { @class = "form-control form-title" } })
-                </div>
+            <div class="div-title">
+                @Html.Editor("CategoryName", new { htmlAttributes = new { @class = "form-control form-title" } })
+            </div>
 
-                @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
+            @Html.ValidationMessage("CategoryName", null, new { @class = "text-danger" })
+
+            <h1 style="color:#303952;">
+                <label>Change picture</label>
+            </h1>
+
+            <div class="div-title" style="padding-left:50px;">
+                <input type="file" name="reqUploadedFile" />
             </div>
+
+            @Html.ValidationMessage("CategoryPicture", null, new { @class = "text-danger" })
+        </div>
             <br />
-            <div class="form-group">
-                <label>Change the picture</label>
-                <input type="file" name="reqUploadedFile"/>
-            </div>
-            <br />
+           
             <button type="submit" class="button" style="background-color:#e15f41;">
                 <span style="color:white;">Submit</span>
             </button>
