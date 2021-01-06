@@ -151,7 +151,7 @@ namespace OpenDiscussionPlatform.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User, Moderator, Admin")]
         [ValidateInput(false)]
         public ActionResult Edit (string id, ApplicationUser reqUser, HttpPostedFileBase reqUploadedFile)
         {
