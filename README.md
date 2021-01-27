@@ -8,3 +8,7 @@ Proiect pentru Dezvoltarea aplicatiilor web, anul II, sem I.
 - Gherghe Delia
 - Hazaparu Daria
 
+https://tinyurl.com/opendiscussionappdata
+
+
+
